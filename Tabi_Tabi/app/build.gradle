@@ -5,7 +5,6 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
-
     defaultConfig {
         applicationId "com.example.tabi_tabi"
         minSdkVersion 16
@@ -13,7 +12,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        manifestPlaceholders = [API_KEY: System.getenv("API_KEY")]
+//        manifestPlaceholders = [api_key: System.getenv("APIKEY")]
     }
 
     buildTypes {
