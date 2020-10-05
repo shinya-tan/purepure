@@ -11,9 +11,8 @@ import kotlinx.android.synthetic.main.activity_home.*
 class HomeActivity : AppCompatActivity() {
 
     private val texts = arrayOf(
-        "abc ", "bcd", "cde", "def", "efg",
-        "fgh", "ghi", "hij", "ijk", "jkl", "klm", "lmn", "mno", "nop",
-        "opq", "pqr", "qrs", "rst", "stu", "tuv", "uvw", "vwx", "wxy", "xyz"
+        "#クイズ ", "#首里城", "#無観客ライブ", "#剣持ボイス出せ", "#callioP",
+        "#gawrt", "#chumbuds", "#FBKbirthday2020", "#台風14号", "jkl", "klm", "lmn", "mno", "nop"
     )
 
 
