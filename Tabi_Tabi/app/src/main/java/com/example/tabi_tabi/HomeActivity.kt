@@ -1,5 +1,6 @@
 package com.example.tabi_tabi
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
@@ -26,7 +27,8 @@ class HomeActivity : AppCompatActivity() {
         footer.setOnNavigationItemReselectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_recommend -> {
-                    
+                    val intent = Intent(this, ActivityReccomend::class.java)
+                    startActivity(intent)
                 }
             }
         }
