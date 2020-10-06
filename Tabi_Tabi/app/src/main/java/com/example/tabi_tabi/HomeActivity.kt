@@ -1,5 +1,6 @@
 package com.example.tabi_tabi
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
@@ -25,13 +26,13 @@ class HomeActivity : AppCompatActivity() {
         image_sun.setColorFilter(Color.parseColor("#F44336"), PorterDuff.Mode.SRC_IN)
         footer.setOnNavigationItemReselectedListener { item ->
             when (item.itemId) {
-                R.id.navigation_timeline -> {
-
+                R.id.navigation_recommend -> {
+                    val intent = Intent(this, ActivityReccomend::class.java)
+                    startActivity(intent)
                 }
             }
         }
         listview1.adapter = arrayAdapter
-
     }
 
 }
