@@ -1,10 +1,10 @@
 # team name
 ぷりぷり
 
-#Application Name
+# Application Name
 旅☆旅★EasyDiary(仮)
 
-#Elevator pitch
+# Elevator pitch
 旅行先が決まらないことを解決したい
 旅行好きのための手軽に観光先を見つける事ができる
 旅☆旅★Easy Diaryです
