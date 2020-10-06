@@ -33,6 +33,7 @@ class HomeActivity : AppCompatActivity() {
             }
         }
         listview1.adapter = arrayAdapter
+        listview2.adapter = arrayAdapter
     }
 
 }
