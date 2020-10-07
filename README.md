@@ -10,5 +10,5 @@
 旅☆旅★Easy Diaryです
 これはスポットを見つけたり投稿したりする事ができ、既存の観光案内アプリのるるぶなどにはない、マニアックなスポットなどを知る事ができる。
 
-# execute enviroment
+# execution environment
 Androir Studio ver.Kotlin
