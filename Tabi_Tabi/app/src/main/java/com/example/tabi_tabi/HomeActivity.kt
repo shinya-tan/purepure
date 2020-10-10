@@ -23,6 +23,11 @@ class HomeActivity : AppCompatActivity() {
             this,
             android.R.layout.simple_list_item_1, texts
         )
+        val firstFragment = FirstFragment()
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.add(R.id.fragment_post, firstFragment)
+        fragmentTransaction.commit()
+
         image_sun.setColorFilter(Color.parseColor("#F44336"), PorterDuff.Mode.SRC_IN)
         footer.setOnNavigationItemReselectedListener { item ->
             when (item.itemId) {
