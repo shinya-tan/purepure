@@ -16,6 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".TimeLineActivity"
+            android:label="@string/title_activity_time_line"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme">
@@ -39,9 +43,8 @@
 
         <activity
             android:name=".ActivityReccomend"
-            android:label="Reccomend"></activity>
-
-        <activity android:name=".MapsActivity"></activity>
+            android:label="Reccomend" />
+        <activity android:name=".MapsActivity" />
     </application>
 
 </manifest>

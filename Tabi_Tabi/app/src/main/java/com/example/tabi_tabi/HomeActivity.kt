@@ -35,6 +35,10 @@ class HomeActivity : AppCompatActivity() {
                     val intent = Intent(this, ActivityReccomend::class.java)
                     startActivity(intent)
                 }
+                R.id.navigation_timeline -> {
+                    val intent = Intent(this, TimeLineActivity::class.java)
+                    startActivity(intent)
+                }
             }
         }
         listview1.adapter = arrayAdapter
