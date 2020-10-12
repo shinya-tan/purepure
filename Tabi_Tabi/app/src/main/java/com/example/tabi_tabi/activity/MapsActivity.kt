@@ -1,7 +1,8 @@
-package com.example.tabi_tabi
+package com.example.tabi_tabi.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.tabi_tabi.R
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
