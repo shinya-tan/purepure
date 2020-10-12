@@ -1,4 +1,4 @@
-package com.example.tabi_tabi
+package com.example.tabi_tabi.adapter
 
 import android.content.Context
 import android.view.View
@@ -6,16 +6,22 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import android.view.LayoutInflater
+import com.example.tabi_tabi.R
 
 
-class TimeLineContentsAdapter : BaseAdapter {
-    private val mInflater: LayoutInflater
+class TimeLineContentsAdapter(
+    context: Context,
+    layoutid: Int,
+    name: Array<String>,
+    text: Array<String>
+) : BaseAdapter() {
+    private val mInflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-    private var context: Context? = null
-    private var layout_id:Int=0
+    private var context: Context? = context
+    private var layoutId: Int = layoutid
 
-    private val namelist: Array<String>
-    private val emaillist: Array<String>
+    private val nameList: Array<String> = name
+    private val emailList: Array<String> = text
 
     internal class ViewHolder {
         var text: TextView? = null
@@ -23,23 +29,13 @@ class TimeLineContentsAdapter : BaseAdapter {
     }
 
 
-    public constructor(context: Context, layoutid:Int, name:Array<String>,text:Array<String>) {
-        namelist=name
-        emaillist=text
-
-        this.layout_id = layoutid
-        this.context = context
-
-        mInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-    }
-
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val holder: ViewHolder
 
         var convertView = convertView
 
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.timeline_content_layout, null)
+            convertView = mInflater.inflate(R.layout.item_timeline_content, null)
             holder = ViewHolder()
             holder.text = convertView.findViewById(R.id.text_view)
             holder.email = convertView.findViewById(R.id.text_mail)
@@ -52,12 +48,12 @@ class TimeLineContentsAdapter : BaseAdapter {
         val str = """
             Staff ID.170900${java.lang.String.valueOf(position + 1)}
             
-            Email: ${emaillist[position]}
+            Email: ${emailList[position]}
             Tel: 020-8931-9933 #340${java.lang.String.valueOf(position + 1)}
             """.trimIndent()
         holder.email!!.setText(str)
 
-        holder.text!!.setText(namelist[position])
+        holder.text!!.setText(nameList[position])
 
         return convertView!!
     }
@@ -71,7 +67,7 @@ class TimeLineContentsAdapter : BaseAdapter {
     }
 
     override fun getCount(): Int {
-        return namelist.size
+        return nameList.size
     }
 
 }
