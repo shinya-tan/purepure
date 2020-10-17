@@ -7,21 +7,27 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import android.view.LayoutInflater
 import com.example.tabi_tabi.R
+import com.example.tabi_tabi.fragment.Timelinemodel
+import java.sql.Time
 
 
 class TimeLineContentsAdapter(
     context: Context,
     layoutid: Int,
-    name: Array<String>,
-    text: Array<String>
+    name: ArrayList<Timelinemodel>?,
+    text: ArrayList<Timelinemodel>?
 ) : BaseAdapter() {
     private val mInflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     private var context: Context? = context
     private var layoutId: Int = layoutid
+    val born = arrayOf<Int>()
+    val first = arrayOf<String>()
+    val last = arrayOf<String>()
 
-    private val nameList: Array<String> = name
-    private val emailList: Array<String> = text
+
+    private val nameList: ArrayList<String>? = name
+    private val emailList: ArrayList<String>? = text
 
     internal class ViewHolder {
         var text: TextView? = null
@@ -48,12 +54,12 @@ class TimeLineContentsAdapter(
         val str = """
             Staff ID.170900${java.lang.String.valueOf(position + 1)}
             
-            Email: ${emailList[position]}
+            Email: ${emailList?.get(position)}
             Tel: 020-8931-9933 #340${java.lang.String.valueOf(position + 1)}
             """.trimIndent()
         holder.email!!.setText(str)
 
-        holder.text!!.setText(nameList[position])
+        holder.text!!.setText(nameList?.get(position))
 
         return convertView!!
     }
@@ -67,7 +73,7 @@ class TimeLineContentsAdapter(
     }
 
     override fun getCount(): Int {
-        return nameList.size
+        return nameList!!.size
     }
 
 }
