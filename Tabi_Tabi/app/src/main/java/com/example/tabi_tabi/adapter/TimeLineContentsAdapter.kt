@@ -14,8 +14,8 @@ import java.sql.Time
 class TimeLineContentsAdapter(
     context: Context,
     layoutid: Int,
-    name: ArrayList<Timelinemodel>?,
-    text: ArrayList<Timelinemodel>?
+    name: ArrayList<String>?,
+    text: ArrayList<String>?
 ) : BaseAdapter() {
     private val mInflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 

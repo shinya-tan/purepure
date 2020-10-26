@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_time_line.*
 
 class TimeLineFragment : Fragment() {
     private var db: FirebaseFirestore? = null
-    val mMissionsList: ArrayList<Timelinemodel>? = null
+    val mMissionsList: ArrayList<String>? = null
 
     private val texts = arrayOf(
         "#クイズ ", "#首里城", "#無観客ライブ", "#剣持ボイス出せ", "#callioP",
@@ -32,7 +32,7 @@ class TimeLineFragment : Fragment() {
                 override fun onComplete(task: Task<QuerySnapshot>) {
                     if (task.isSuccessful) {
                         for (document in task.result!!) {
-                            val miss: Timelinemodel = document.toObject(Timelinemodel::class.java)
+                            val miss: String = document.toObject(String::class.java)
                             mMissionsList?.add(miss)
                         }
                     } else {
