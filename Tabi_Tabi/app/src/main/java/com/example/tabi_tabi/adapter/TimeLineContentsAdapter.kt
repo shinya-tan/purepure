@@ -7,7 +7,7 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import android.view.LayoutInflater
 import com.example.tabi_tabi.R
-import com.example.tabi_tabi.fragment.TimeLineModel
+import com.example.tabi_tabi.model.TimeLineModel
 
 
 class TimeLineContentsAdapter(

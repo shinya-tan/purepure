@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_time_line.*
 class TimeLineFragment : Fragment() {
     private var db: FirebaseFirestore? = null
     private val timeLineList: ArrayList<TimeLineModel>? = ArrayList()
-//
+
 //    private val texts = arrayOf(
 //        "#クイズ ", "#首里城", "#無観客ライブ", "#剣持ボイス出せ", "#callioP",
 //        "#gawrt", "#chumbuds", "#FBKbirthday2020", "#台風14号", "jkl", "klm", "lmn", "mno", "nop"
@@ -28,7 +28,6 @@ class TimeLineFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         return inflater.inflate(R.layout.fragment_time_line, container, false)
     }
 
