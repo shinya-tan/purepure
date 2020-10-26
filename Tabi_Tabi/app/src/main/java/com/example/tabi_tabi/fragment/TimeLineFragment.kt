@@ -9,46 +9,19 @@ import android.widget.BaseAdapter
 import androidx.fragment.app.Fragment
 import com.example.tabi_tabi.R
 import com.example.tabi_tabi.adapter.TimeLineContentsAdapter
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
+import com.example.tabi_tabi.model.TimeLineModel
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.android.synthetic.main.fragment_time_line.*
 
 
 class TimeLineFragment : Fragment() {
     private var db: FirebaseFirestore? = null
-    val mMissionsList: ArrayList<String>? = null
-
-    private val texts = arrayOf(
-        "#クイズ ", "#首里城", "#無観客ライブ", "#剣持ボイス出せ", "#callioP",
-        "#gawrt", "#chumbuds", "#FBKbirthday2020", "#台風14号", "jkl", "klm", "lmn", "mno", "nop"
-    )
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        val db = FirebaseFirestore.getInstance()
-        db.collection("users").get()
-            .addOnCompleteListener(object : OnCompleteListener<QuerySnapshot> {
-                override fun onComplete(task: Task<QuerySnapshot>) {
-                    if (task.isSuccessful) {
-                        for (document in task.result!!) {
-                            val miss: String = document.toObject(String::class.java)
-                            mMissionsList?.add(miss)
-                        }
-                    } else {
-                        Log.d(
-                            "MissionActivity",
-                            "Error getting documents: ",
-                            task.exception
-                        )
-                    }
-                }
-            })
-
-
-        super.onCreate(savedInstanceState)
-
-    }
+    private val timeLineList: ArrayList<TimeLineModel>? = ArrayList()
+//
+//    private val texts = arrayOf(
+//        "#クイズ ", "#首里城", "#無観客ライブ", "#剣持ボイス出せ", "#callioP",
+//        "#gawrt", "#chumbuds", "#FBKbirthday2020", "#台風14号", "jkl", "klm", "lmn", "mno", "nop"
+//    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,35 +33,29 @@ class TimeLineFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val arrayAdapter: BaseAdapter = TimeLineContentsAdapter(
-            context!!, R.layout.item_timeline_content, mMissionsList, mMissionsList
-        )
-
-        timelineListView.adapter = arrayAdapter
+        this.db = FirebaseFirestore.getInstance()
         activity?.actionBar?.title = "タイムライン"
 
-
+        db!!.collection("users").get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    for (document in task.result!!) {
+                        val timeLineModel: TimeLineModel =
+                            document.toObject(TimeLineModel::class.java)
+                        timeLineList?.add(timeLineModel)
+                    }
+                    val arrayAdapter: BaseAdapter = TimeLineContentsAdapter(
+                        context!!, R.layout.item_timeline_content, timeLineList
+                    )
+                    timelineListView.adapter = arrayAdapter
+                } else {
+                    Log.d(
+                        "MissionActivity",
+                        "Error getting documents: ",
+                        task.exception
+                    )
+                }
+            }
     }
 }
 
-class Timelinemodel {
-    var born: String? = null
-        private set
-    var first: Number? = null
-        private set
-    var last: String? = null
-        private set
-
-
-    constructor() {}
-    constructor(
-        title: String?,
-        exp: Number?,
-        date: String?,
-        description: String?
-    ) {
-        this.born = born
-        this.first = first
-        this.last = last
-    }
-}

@@ -7,27 +7,19 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import android.view.LayoutInflater
 import com.example.tabi_tabi.R
-import com.example.tabi_tabi.fragment.Timelinemodel
-import java.sql.Time
+import com.example.tabi_tabi.fragment.TimeLineModel
 
 
 class TimeLineContentsAdapter(
     context: Context,
     layoutid: Int,
-    name: ArrayList<String>?,
-    text: ArrayList<String>?
+    name: ArrayList<TimeLineModel>?
 ) : BaseAdapter() {
-    private val mInflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    private val mInflater: LayoutInflater =
+        context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-    private var context: Context? = context
     private var layoutId: Int = layoutid
-    val born = arrayOf<Int>()
-    val first = arrayOf<String>()
-    val last = arrayOf<String>()
-
-
-    private val nameList: ArrayList<String>? = name
-    private val emailList: ArrayList<String>? = text
+    private var nameList: ArrayList<TimeLineModel>? = name
 
     internal class ViewHolder {
         var text: TextView? = null
@@ -41,7 +33,7 @@ class TimeLineContentsAdapter(
         var convertView = convertView
 
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.item_timeline_content, null)
+            convertView = mInflater.inflate(layoutId, null)
             holder = ViewHolder()
             holder.text = convertView.findViewById(R.id.text_view)
             holder.email = convertView.findViewById(R.id.text_mail)
@@ -49,17 +41,9 @@ class TimeLineContentsAdapter(
         } else {
             holder = convertView.tag as ViewHolder
         }
+        holder.email!!.text = nameList!![position].first
 
-
-        val str = """
-            Staff ID.170900${java.lang.String.valueOf(position + 1)}
-            
-            Email: ${emailList?.get(position)}
-            Tel: 020-8931-9933 #340${java.lang.String.valueOf(position + 1)}
-            """.trimIndent()
-        holder.email!!.setText(str)
-
-        holder.text!!.setText(nameList?.get(position))
+        holder.text!!.text = nameList!![position].last
 
         return convertView!!
     }
@@ -73,7 +57,9 @@ class TimeLineContentsAdapter(
     }
 
     override fun getCount(): Int {
-        return nameList!!.size
+        if (this.nameList != null) {
+            return this.nameList!!.size
+        }
+        return 0
     }
-
 }

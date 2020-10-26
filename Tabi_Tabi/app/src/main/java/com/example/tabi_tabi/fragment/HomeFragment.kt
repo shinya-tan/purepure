@@ -1,4 +1,4 @@
-package com.example.tabi_tabi .fragment
+package com.example.tabi_tabi.fragment
 
 import android.content.ContentValues.TAG
 import android.graphics.Color
@@ -38,48 +38,20 @@ class HomeFragment : Fragment() {
     var arrayAdapter :ArrayAdapter<String>? = null
 
 
+    var db: FirebaseFirestore? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        val db = FirebaseFirestore.getInstance()
-//        val docRef = db.collection("users").document("SLw7nCxHIaHp2Vt49ndj")
-//        docRef.get()
-//            .addOnSuccessListener { document ->
-//                if (document != null) {
-//                    Log.d(TAG, "DocumentSnapshot data: ${document.data}")
-//                    texts += document.get("born").toString()
-//                    Input = document.get("born").toString()
-//                    Log.d(TAG, "Inputの中身 : ${Input}")
-//                    texts += "これもテスト"
-//                } else {
-//                    Log.d(TAG, "No such document")
-//                }
-//            }
-//            .addOnFailureListener { exception ->
-//                Log.d(TAG, "get failed with ", exception)
-//            }
-
-        //ここからしたは入力
-//        db.collection("users")
-//            .get()
-//            .addOnSuccessListener { result ->
-//                for (document in result) {
-//                    Log.d(TAG, "${document.id} => ${document.data}")
-//                }
-//            }
-//            .addOnFailureListener { exception ->
-//                Log.w(TAG, "Error getting documents.", exception)
-//            }
-
-        //俺が買いたやつこれも入力
-//        val data = hashMapOf<String,Any>()
-//        data["fish"] = "nanoka"
-//        db.collection("group").add(data)
-//            .addOnSuccessListener{
-//                // 保存成功
-//            }.addOnFailureListener{
-//                // 保存失敗
-//            }
-
+        this.db = FirebaseFirestore.getInstance()
+        db!!.collection("users")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    Log.d(TAG, "${document.id} => ${document.data}")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents.", exception)
+            }
     }
 
     override fun onCreateView(
