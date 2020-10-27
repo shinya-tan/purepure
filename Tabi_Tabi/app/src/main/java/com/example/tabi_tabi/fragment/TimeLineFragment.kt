@@ -18,11 +18,6 @@ class TimeLineFragment : Fragment() {
     private var db: FirebaseFirestore? = null
     private val timeLineList: ArrayList<TimeLineModel>? = ArrayList()
 
-//    private val texts = arrayOf(
-//        "#クイズ ", "#首里城", "#無観客ライブ", "#剣持ボイス出せ", "#callioP",
-//        "#gawrt", "#chumbuds", "#FBKbirthday2020", "#台風14号", "jkl", "klm", "lmn", "mno", "nop"
-//    )
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

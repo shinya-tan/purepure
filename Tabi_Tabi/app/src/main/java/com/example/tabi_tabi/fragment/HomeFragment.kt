@@ -9,33 +9,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.appcompat.app.ActionBar
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.tabi_tabi.R
-import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_home.*
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
 import com.google.firebase.firestore.FirebaseFirestore
 
 
-
 class HomeFragment : Fragment() {
-    //arrayListOf<String>
     var texts = arrayOf(
         "#クイズ ", "#首里城", "#無観客ライブ", "#剣持ボイス出せ", "#callioP",
         "#gawrt", "#chumbuds", "#FBKbirthday2020", "#台風14号"
     )
-    var Input :String? = null
+    var input: String? = null
 
-    private lateinit var database: DatabaseReference
-
-    var arrayAdapter :ArrayAdapter<String>? = null
+    var arrayAdapter: ArrayAdapter<String>? = null
 
 
     var db: FirebaseFirestore? = null
@@ -72,14 +59,15 @@ class HomeFragment : Fragment() {
                 if (document != null) {
                     Log.d(TAG, "DocumentSnapshot data: ${document.data}")
                     texts += document.get("born").toString()
-                    Input = document.get("born").toString()
-                    Log.d(TAG, "Inputの中身 : ${Input}")
-                    texts += "これもテスト"
-                     this.arrayAdapter = ArrayAdapter<String>(
+                    input = document.get("born").toString()
+                    Log.d(TAG, "Inputの中身 : ${input}")
+                    this.arrayAdapter = ArrayAdapter<String>(
                         context!!,
-                        android.R.layout.simple_list_item_1).apply {
+                        android.R.layout.simple_list_item_1
+                    ).apply {
                         add("test")
-                        add(Input)}
+                        add(input)
+                    }
                     listview1.adapter = arrayAdapter
                     listview2.adapter = arrayAdapter
                 } else {
@@ -89,15 +77,6 @@ class HomeFragment : Fragment() {
             .addOnFailureListener { exception ->
                 Log.d(TAG, "get failed with ", exception)
             }
-
-
-//        val docRef = db.collection("users").document("SLw7nCxHIaHp2Vt49ndj")
-//        var Input :String ?= null
-
-//        arrayAdapter.run {
-//            remove("#台風14号");
-//            //add(Input)
-//        };
 
 
         image_sun.setColorFilter(Color.parseColor("#F44336"), PorterDuff.Mode.SRC_IN)

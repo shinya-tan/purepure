@@ -17,7 +17,6 @@ class TimeLineContentsAdapter(
 ) : BaseAdapter() {
     private val mInflater: LayoutInflater =
         context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-
     private var layoutId: Int = layoutid
     private var nameList: ArrayList<TimeLineModel>? = name
 
@@ -25,7 +24,6 @@ class TimeLineContentsAdapter(
         var text: TextView? = null
         var email: TextView? = null
     }
-
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val holder: ViewHolder

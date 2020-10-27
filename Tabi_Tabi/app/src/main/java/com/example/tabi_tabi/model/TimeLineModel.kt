@@ -10,10 +10,9 @@ class TimeLineModel {
 
     constructor()
     constructor(
-        title: String?,
-        exp: Number?,
-        date: String?,
-        description: String?
+        born: Number?,
+        first: String?,
+        last: String?
     ) {
         this.first = first
         this.last = last
