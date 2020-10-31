@@ -46,6 +46,7 @@ class PostFragment : Fragment() {
                 }
                 .addOnFailureListener {
                     Toast.makeText(context, "送信失敗", Toast.LENGTH_SHORT).show();
+
                 }
 
         }
