@@ -1,6 +1,7 @@
 package com.example.tabi_tabi.activity
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tabi_tabi.R
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         val actionBar: ActionBar? = supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
+
         footer.setOnNavigationItemReselectedListener { item ->
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             when (item.itemId) {
@@ -38,6 +40,7 @@ class MainActivity : AppCompatActivity() {
             fragmentTransaction.addToBackStack(null).commit()
         }
     }
+
 
     public fun setActionBarTitle(title: String?) {
         actionBar!!.title = title

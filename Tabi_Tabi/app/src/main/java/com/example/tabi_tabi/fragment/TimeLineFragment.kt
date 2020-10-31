@@ -29,7 +29,6 @@ class TimeLineFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         this.db = FirebaseFirestore.getInstance()
         activity?.actionBar?.title = "タイムライン"
-
         db!!.collection("users").get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
