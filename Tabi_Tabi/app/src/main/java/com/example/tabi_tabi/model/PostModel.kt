@@ -1,5 +1,6 @@
 package com.example.tabi_tabi.model
 
+import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.GeoPoint
 
@@ -18,7 +19,7 @@ class PostModel {
     constructor(
         title: String?,
         descriptor: String?,
-        location: GeoPoint?,
+        location: LatLng,
         altitude: Number?,
         createdAt: Timestamp?,
         content: String?,
@@ -27,7 +28,7 @@ class PostModel {
     ) {
         this.title = title
         this.description = descriptor
-        this.location = location
+        this.location = GeoPoint(location.latitude,location.longitude)
         this.altitude = altitude
         this.createdAt = createdAt
         this.content = content
