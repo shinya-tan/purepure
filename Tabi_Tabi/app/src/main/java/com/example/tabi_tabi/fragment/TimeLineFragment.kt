@@ -29,8 +29,6 @@ class TimeLineFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         this.db = FirebaseFirestore.getInstance()
         activity?.actionBar?.title = "タイムライン"
-<<<<<<< Updated upstream
-
         db!!.collection("users").get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -51,28 +49,5 @@ class TimeLineFragment : Fragment() {
                     )
                 }
             }
-=======
-        //db!!.collection("users").get()
-//            .addOnCompleteListener { task ->
-//                if (task.isSuccessful) {
-//                    for (document in task.result!!) {
-//                        val timeLineModel: TimeLineModel =
-//                            document.toObject(TimeLineModel::class.java)
-//                        timeLineList?.add(timeLineModel)
-//                    }
-//                    val arrayAdapter: BaseAdapter = TimeLineContentsAdapter(
-//                        context!!, R.layout.item_timeline_content, timeLineList
-//                    )
-//                    timelineListView.adapter = arrayAdapter
-//                } else {
-//                    Log.d(
-//                        "MissionActivity",
-//                        "Error getting documents: ",
-//                        task.exception
-//                    )
-//                }
-//            }
->>>>>>> Stashed changes
     }
 }
-
