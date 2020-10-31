@@ -8,12 +8,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.tabi_tabi.R
 import com.example.tabi_tabi.model.PostModel
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_post.*
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 class PostFragment : BaseFragment() {
 
@@ -50,25 +54,31 @@ class PostFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        fun getNowDate(): String? {
+            val df: DateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
+            val date = Date(System.currentTimeMillis())
+            return df.format(date)
+        }
+
         button2!!.setOnClickListener {
             val titletext = edit_text1!!.text.toString()
             val posttext = edit_text2!!.text.toString()
             val location = LatLng(latitude!!,longitude!!)
+            val createdAt = getNowDate()
+            
             val db = FirebaseFirestore.getInstance()
-            val post :PostModel = PostModel(
-                titletext,posttext,location,altitude,"time","content","usrID")
-            )
-            //val user = TimeLineModel(1813, titletext, posttext)
-//            db.collection("users")
-//                .document()
-//                .set(user)
-//                .addOnSuccessListener {
-//                    Toast.makeText(context, "送信成功", Toast.LENGTH_SHORT).show();
-//                }
-//                .addOnFailureListener {
-//                    Toast.makeText(context, "送信失敗", Toast.LENGTH_SHORT).show();
-//
-//                }
+            val user :PostModel = PostModel(
+                titletext,posttext,location,altitude, createdAt,"content","usrID")
+            db.collection("users")
+                .document()
+                .set(user)
+                .addOnSuccessListener {
+                    Toast.makeText(context, "送信成功", Toast.LENGTH_SHORT).show();
+                }
+                .addOnFailureListener {
+                    Toast.makeText(context, "送信失敗", Toast.LENGTH_SHORT).show();
+
+                }
 
         }
 
