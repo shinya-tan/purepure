@@ -8,15 +8,15 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import androidx.fragment.app.Fragment
 import com.example.tabi_tabi.R
-import com.example.tabi_tabi.adapter.TimeLineContentsAdapter
-import com.example.tabi_tabi.model.TimeLineModel
+//import com.example.tabi_tabi.adapter.TimeLineContentsAdapter
+//import com.example.tabi_tabi.model.TimeLineModel
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_time_line.*
 
 
 class TimeLineFragment : Fragment() {
     private var db: FirebaseFirestore? = null
-    private val timeLineList: ArrayList<TimeLineModel>? = ArrayList()
+    //private val timeLineList: ArrayList<TimeLineModel>? = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,4 +51,3 @@ class TimeLineFragment : Fragment() {
             }
     }
 }
-
