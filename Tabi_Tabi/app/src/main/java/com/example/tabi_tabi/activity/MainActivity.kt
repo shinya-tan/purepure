@@ -1,14 +1,16 @@
 package com.example.tabi_tabi.activity
 
+//import com.example.tabi_tabi.fragment.PostFragment
+import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tabi_tabi.R
-//import com.example.tabi_tabi.fragment.PostFragment
+import com.example.tabi_tabi.fragment.PostFragment
 import com.example.tabi_tabi.fragment.RecommendFragment
 import com.example.tabi_tabi.fragment.TimeLineFragment
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,8 +35,8 @@ class MainActivity : AppCompatActivity() {
                     fragmentTransaction.replace(R.id.container_fragment, timeLineFragment)
                 }
                 R.id.navigation_search -> {
-                    //val postFragment = PostFragment()
-                    //fragmentTransaction.replace(R.id.container_fragment, postFragment)
+                    val postFragment = PostFragment()
+                    fragmentTransaction.replace(R.id.container_fragment, postFragment)
                 }
             }
             fragmentTransaction.addToBackStack(null).commit()
