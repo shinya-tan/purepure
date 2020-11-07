@@ -9,7 +9,7 @@ class PostModel {
     var title: String? = null
     var description: String? = null
     var location: GeoPoint? = null
-    var altitude: Number? = null
+    var altitude: Double? = null
     var createdAt: String? = null
     var content: String? = null
     var userId: String? = null
@@ -20,7 +20,7 @@ class PostModel {
         title: String?,
         descriptor: String?,
         location: LatLng,
-        altitude: Number?,
+        altitude: Double?,
         createdAt: String?,
         content: String?,
         userId: String?
