@@ -1,21 +1,30 @@
 package com.example.tabi_tabi.activity
 
-//import com.example.tabi_tabi.fragment.PostFragment
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.tabi_tabi.R
+import com.example.tabi_tabi.fragment.HomeFragment
 import com.example.tabi_tabi.fragment.PostFragment
 import com.example.tabi_tabi.fragment.RecommendFragment
 import com.example.tabi_tabi.fragment.TimeLineFragment
 import kotlinx.android.synthetic.main.activity_main.*
-
+import com.example.tabi_tabi.activity.MapsActivity
 
 class MainActivity : AppCompatActivity() {
+    val recommendFragment = RecommendFragment()
+    val timeLineFragment = TimeLineFragment()
+    val postFragment = PostFragment()
+    val mapActivity = MapsActivity()
+    val fragmentManager = supportFragmentManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        //supportActionBar.hashCode()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -26,25 +35,41 @@ class MainActivity : AppCompatActivity() {
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             when (item.itemId) {
                 R.id.navigation_recommend -> {
-                    val recommendFragment = RecommendFragment()
+                    Log.d("test", "next")
                     fragmentTransaction.replace(R.id.container_fragment, recommendFragment)
+                    supportActionBar!!.show()
                 }
 
                 R.id.navigation_timeline -> {
-                    val timeLineFragment = TimeLineFragment()
                     fragmentTransaction.replace(R.id.container_fragment, timeLineFragment)
+                    supportActionBar!!.show()
                 }
                 R.id.navigation_search -> {
-                    val postFragment = PostFragment()
                     fragmentTransaction.replace(R.id.container_fragment, postFragment)
+                    supportActionBar!!.show()
+                }
+                R.id.navigation_searchpost -> {
+                    val intent = Intent(applicationContext, MapsActivity::class.java)
+                    startActivity(intent)
+                    supportActionBar!!.show()
                 }
             }
             fragmentTransaction.addToBackStack(null).commit()
+
         }
     }
 
-
-    public fun setActionBarTitle(title: String?) {
+    fun setActionBarTitle(title: String?) {
         actionBar!!.title = title
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id: Int = item.itemId
+        if (id == android.R.id.home) {
+            supportFragmentManager.popBackStack()
+            supportActionBar!!.hide()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 }
