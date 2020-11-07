@@ -30,7 +30,7 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.db = FirebaseFirestore.getInstance()
-        db!!.collection("users")
+        db!!.collection("posts")
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {

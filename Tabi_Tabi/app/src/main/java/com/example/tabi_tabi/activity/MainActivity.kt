@@ -1,5 +1,6 @@
 package com.example.tabi_tabi.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -12,12 +13,13 @@ import com.example.tabi_tabi.fragment.PostFragment
 import com.example.tabi_tabi.fragment.RecommendFragment
 import com.example.tabi_tabi.fragment.TimeLineFragment
 import kotlinx.android.synthetic.main.activity_main.*
-
+import com.example.tabi_tabi.activity.MapsActivity
 
 class MainActivity : AppCompatActivity() {
     val recommendFragment = RecommendFragment()
     val timeLineFragment = TimeLineFragment()
     val postFragment = PostFragment()
+    val mapActivity = MapsActivity()
     val fragmentManager = supportFragmentManager
 
 
@@ -44,6 +46,11 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.navigation_search -> {
                     fragmentTransaction.replace(R.id.container_fragment, postFragment)
+                    supportActionBar!!.show()
+                }
+                R.id.navigation_searchpost -> {
+                    val intent = Intent(applicationContext, MapsActivity::class.java)
+                    startActivity(intent)
                     supportActionBar!!.show()
                 }
             }
