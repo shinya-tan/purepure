@@ -76,7 +76,6 @@ class PostFragment : BaseFragment() {
             val location = LatLng(latitude!!, longitude!!)
             val createdAt = getNowDate()
             val storageRef = Firebase.storage.reference
-
             val riversRef = storageRef.child("images/${path!!.lastPathSegment}")
             val uploadTask = riversRef.putFile(path!!)
             uploadTask.addOnSuccessListener {
@@ -84,7 +83,7 @@ class PostFragment : BaseFragment() {
                 val db = FirebaseFirestore.getInstance()
                 val user = PostModel(
                     titletext, posttext, location, altitude, createdAt,
-                    riversRef.downloadUrl.toString(), "usrID"
+                    "images/${path!!.lastPathSegment}", "usrID"
                 )
                 db.collection("posts")
                     .document()
@@ -95,7 +94,9 @@ class PostFragment : BaseFragment() {
                     .addOnFailureListener {
                         Toast.makeText(context, "送信失敗", Toast.LENGTH_SHORT).show();
 
+
                     }
+
             }
                 .addOnFailureListener { error ->
                     Log.d("upload", "$error")
