@@ -28,7 +28,7 @@ class PostModel {
     ) {
         this.title = title
         this.description = descriptor
-        this.location = GeoPoint(location.latitude,location.longitude)
+        this.location = GeoPoint(location.latitude, location.longitude)
         this.altitude = altitude
         this.createdAt = createdAt
         this.content = content

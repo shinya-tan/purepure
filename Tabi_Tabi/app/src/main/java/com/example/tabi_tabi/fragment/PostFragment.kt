@@ -80,7 +80,6 @@ class PostFragment : BaseFragment() {
             val riversRef = storageRef.child("images/${path!!.lastPathSegment}")
             val uploadTask = riversRef.putFile(path!!)
             uploadTask.addOnSuccessListener {
-                Log.d("upload", "success")
                 val db = FirebaseFirestore.getInstance()
                 val user = PostModel(
                     titletext, posttext, location, altitude, createdAt,

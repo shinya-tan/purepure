@@ -12,13 +12,13 @@ import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.*
 
 class MyLocationManager(
-    context: Context?,
+    private var context: Context?,
     mListner: OnLocationResultListener?
 ) : LocationCallback() {
-    private var context: Context? = context
-    private var fusedLocationProviderClient: FusedLocationProviderClient? = LocationServices.getFusedLocationProviderClient(
-        context!!
-    )
+    private var fusedLocationProviderClient: FusedLocationProviderClient? =
+        LocationServices.getFusedLocationProviderClient(
+            context!!
+        )
     private var mListener: OnLocationResultListener? = mListner
 
 
@@ -26,22 +26,12 @@ class MyLocationManager(
         fun onLocationResult(locationResult: LocationResult?)
     }
 
-//    fun MyLocationManager(
-//        context: Context,
-//        mListener: OnLocationResultListener?
-//    ) {
-//        this.context = context
-//        this.mListener = mListener
-//        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
-//    }
-
     override fun onLocationResult(locationResult: LocationResult) {
         super.onLocationResult(locationResult)
         mListener!!.onLocationResult(locationResult)
     }
 
     fun startLocationUpdates() {
-        // パーミッションの確認
         if (ActivityCompat.checkSelfPermission(
                 context!!,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -76,7 +66,7 @@ class MyLocationManager(
     }
 
     private val isGPSEnabled: Boolean
-        private get() {
+        get() {
             val locationManager =
                 context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
             return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
