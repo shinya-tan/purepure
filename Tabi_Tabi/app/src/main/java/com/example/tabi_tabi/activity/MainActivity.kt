@@ -16,15 +16,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 import com.example.tabi_tabi.activity.MapsActivity
 
 class MainActivity : AppCompatActivity() {
-    val recommendFragment = RecommendFragment()
-    val timeLineFragment = TimeLineFragment()
-    val postFragment = PostFragment()
-    val mapActivity = MapsActivity()
-    val fragmentManager = supportFragmentManager
+    private val recommendFragment = RecommendFragment()
+    private val timeLineFragment = TimeLineFragment()
+    private val postFragment = PostFragment()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        //supportActionBar.hashCode()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -57,10 +54,6 @@ class MainActivity : AppCompatActivity() {
             fragmentTransaction.addToBackStack(null).commit()
 
         }
-    }
-
-    fun setActionBarTitle(title: String?) {
-        actionBar!!.title = title
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

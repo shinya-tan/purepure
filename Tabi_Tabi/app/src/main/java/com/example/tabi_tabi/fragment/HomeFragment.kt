@@ -61,7 +61,7 @@ class HomeFragment : Fragment() {
                     Log.d(TAG, "DocumentSnapshot data: ${document.data}")
                     texts += document.get("born").toString()
                     input = document.get("born").toString()
-                    Log.d(TAG, "Inputの中身 : ${input}")
+                    Log.d(TAG, "Inputの中身 : $input")
                     this.arrayAdapter = ArrayAdapter<String>(
                         context!!,
                         android.R.layout.simple_list_item_1
