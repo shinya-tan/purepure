@@ -61,7 +61,6 @@ class TimeLineContentsAdapter(
                     .fit()
                     .centerCrop()
                     .into(holder.image)
-//                holder.image!!.setImageURI(uri)
             }
         }
         holder.email!!.text = nameList!![position].title

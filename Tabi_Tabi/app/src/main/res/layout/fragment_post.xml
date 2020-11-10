@@ -3,16 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f0f0f0">
+    android:background="@drawable/bg_color">
 
     <Button
         android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_frame"
-        android:paddingStart="30dp"
-        android:paddingEnd="30dp"
-        android:text="画像をupload"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button_maru"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="+"
+        android:textSize="20sp"
+        android:textColor="@android:color/holo_blue_dark"
         android:textAllCaps="false"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,14 +26,14 @@
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="140dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.05" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,8 +42,10 @@
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
 
         <EditText
@@ -54,6 +58,8 @@
             android:background="@drawable/text_frame"
             android:gravity="start"
             android:hint="タイトル"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             android:inputType="text" />
 
         <EditText
@@ -66,6 +72,8 @@
             android:background="@drawable/text_frame"
             android:gravity="start"
             android:hint="詳細"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             android:maxLines="10"
             android:minLines="6" />
     </LinearLayout>
@@ -76,6 +84,7 @@
         android:layout_height="100dp"
         android:background="@drawable/button_maru"
         android:text="投稿"
+        android:textColor="@android:color/holo_blue_dark"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -9,10 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.tabi_tabi.R
-import kotlinx.android.synthetic.main.fragment_home.*
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class HomeFragment : Fragment() {
@@ -29,7 +30,7 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.db = FirebaseFirestore.getInstance()
-        db!!.collection("users")
+        db!!.collection("posts")
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
@@ -46,11 +47,11 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         activity?.actionBar?.title = "Home"
         val db = FirebaseFirestore.getInstance()
         val docRef = db.collection("users").document("SLw7nCxHIaHp2Vt49ndj")
@@ -60,7 +61,7 @@ class HomeFragment : Fragment() {
                     Log.d(TAG, "DocumentSnapshot data: ${document.data}")
                     texts += document.get("born").toString()
                     input = document.get("born").toString()
-                    Log.d(TAG, "Inputの中身 : ${input}")
+                    Log.d(TAG, "Inputの中身 : $input")
                     this.arrayAdapter = ArrayAdapter<String>(
                         context!!,
                         android.R.layout.simple_list_item_1

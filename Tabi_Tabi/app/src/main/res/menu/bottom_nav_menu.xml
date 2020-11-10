@@ -16,4 +16,9 @@
         android:icon="@drawable/ic_baseline_post_add_24"
         android:title="投稿" />
 
+    <item
+        android:id="@+id/navigation_searchpost"
+        android:icon="@drawable/ic_baseline_post_add_24"
+        android:title="検索" />
+
 </menu>
