@@ -92,11 +92,9 @@ class PostFragment : BaseFragment() {
           .addOnFailureListener {
             Toast.makeText(context, "送信失敗", Toast.LENGTH_SHORT).show();
           }
-
       }
         .addOnFailureListener { error ->
           Log.d("upload", "$error")
-
         }
     }
 

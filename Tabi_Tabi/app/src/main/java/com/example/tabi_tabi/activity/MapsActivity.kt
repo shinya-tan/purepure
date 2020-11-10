@@ -3,7 +3,6 @@ package com.example.tabi_tabi.activity
 import android.Manifest
 import android.content.ContentValues
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
@@ -20,13 +19,11 @@ import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tabi_tabi.MyLocationManager
 import com.example.tabi_tabi.R
-import com.example.tabi_tabi.model.PostModel
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
@@ -126,6 +123,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
       markerList.add(marker)
       mMap.setOnMarkerClickListener { marker ->
         val markerPosition = marker.position
+        target_point.visibility = View.VISIBLE
         var selectedMarker = -1
         for (i in 0 until dbResult!!.size() - 1) {
           val location = dbResult!!.documents[i].get("location") as GeoPoint
@@ -166,7 +164,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
 
     }
     mMap.isMyLocationEnabled = true
-
+    mMap.setOnMapClickListener {
+      target_point.visibility = View.INVISIBLE
+    }
   }
 
 
