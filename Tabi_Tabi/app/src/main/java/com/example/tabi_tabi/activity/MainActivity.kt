@@ -16,9 +16,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import com.example.tabi_tabi.activity.MapsActivity
 
 class MainActivity : AppCompatActivity() {
-    val recommendFragment = RecommendFragment()
-    val timeLineFragment = TimeLineFragment()
-    val postFragment = PostFragment()
+    private val recommendFragment = RecommendFragment()
+    private val timeLineFragment = TimeLineFragment()
+    private val postFragment = PostFragment()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
