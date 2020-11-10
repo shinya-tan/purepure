@@ -1,7 +1,5 @@
 package com.example.tabi_tabi.fragment
 
-//import com.example.tabi_tabi.model.TimeLineModel
-
 import android.content.ContentValues
 import android.content.Intent
 import android.graphics.BitmapFactory
@@ -39,9 +37,9 @@ class PostFragment : BaseFragment() {
   }
 
   override fun onCreateView(
-      inflater: LayoutInflater,
-      container: ViewGroup?,
-      savedInstanceState: Bundle?
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
   ): View? {
     return inflater.inflate(R.layout.fragment_post, container, false)
   }
@@ -82,8 +80,8 @@ class PostFragment : BaseFragment() {
       uploadTask.addOnSuccessListener {
         val db = FirebaseFirestore.getInstance()
         val user = PostModel(
-            titletext, posttext, location, altitude, createdAt,
-            "images/${path!!.lastPathSegment}", "usrID"
+          titletext, posttext, location, altitude, createdAt,
+          "images/${path!!.lastPathSegment}", "usrID"
         )
         db.collection("posts")
           .document()
@@ -93,8 +91,6 @@ class PostFragment : BaseFragment() {
           }
           .addOnFailureListener {
             Toast.makeText(context, "送信失敗", Toast.LENGTH_SHORT).show();
-
-
           }
 
       }
@@ -113,19 +109,19 @@ class PostFragment : BaseFragment() {
       return
     }
     when (requestCode) {
-        42 -> {
-            try {
-                data?.data?.also { uri ->
-                    val inputStream = activity!!.contentResolver.openInputStream(uri)
-                    val image = BitmapFactory.decodeStream(inputStream)
-                    imageView1.setImageBitmap(image)
-                    path = uri
-                }
-            } catch (e: Exception) {
-                Toast.makeText(context, "エラーが発生しました", Toast.LENGTH_LONG).show()
+      42 -> {
+        try {
+          data?.data?.also { uri ->
+            val inputStream = activity!!.contentResolver.openInputStream(uri)
+            val image = BitmapFactory.decodeStream(inputStream)
+            imageView1.setImageBitmap(image)
+            path = uri
+          }
+        } catch (e: Exception) {
+          Toast.makeText(context, "エラーが発生しました", Toast.LENGTH_LONG).show()
 
-            }
         }
+      }
     }
   }
 
