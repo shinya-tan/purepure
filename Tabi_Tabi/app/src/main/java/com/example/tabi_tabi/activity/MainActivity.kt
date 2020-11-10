@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_searchpost -> {
                     val intent = Intent(applicationContext, MapsActivity::class.java)
                     startActivity(intent)
-                    supportActionBar!!.show()
                 }
             }
             fragmentTransaction.addToBackStack(null).commit()
