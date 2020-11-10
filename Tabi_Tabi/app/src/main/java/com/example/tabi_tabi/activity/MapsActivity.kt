@@ -120,6 +120,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
             selectedMarker = i
           }
         }
+        if (selectedMarker == -1) {
+          return@setOnMarkerClickListener true
+        }
         recyclerView.smoothScrollToPosition(selectedMarker)
         false
       }
