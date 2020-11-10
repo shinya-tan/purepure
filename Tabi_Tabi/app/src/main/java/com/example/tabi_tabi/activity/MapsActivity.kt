@@ -9,10 +9,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -55,6 +57,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
 
 
   override fun onCreate(savedInstanceState: Bundle?) {
+    val actionBar: ActionBar? = supportActionBar
+    actionBar?.setDisplayHomeAsUpEnabled(true)
+
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_maps)
     selectLat = intent.getDoubleExtra("DB_LAT", 0.0)
@@ -94,6 +99,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
       .addOnFailureListener { exception ->
         Log.w(ContentValues.TAG, "Error getting documents.", exception)
       }
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    val id: Int = item.itemId
+    if (id == android.R.id.home) {
+      finish()
+    }
+    return super.onOptionsItemSelected(item)
   }
 
 
