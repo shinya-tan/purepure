@@ -21,6 +21,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import kotlinx.android.synthetic.main.fragment_post.*
+import kotlinx.android.synthetic.main.fragment_post.progress_bar
+import kotlinx.android.synthetic.main.fragment_time_line.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -77,6 +79,7 @@ class PostFragment : BaseFragment() {
       val storageRef = Firebase.storage.reference
       val riversRef = storageRef.child("images/${path!!.lastPathSegment}")
       val uploadTask = riversRef.putFile(path!!)
+      progress_bar.visibility = View.VISIBLE
       uploadTask.addOnSuccessListener {
         val db = FirebaseFirestore.getInstance()
         val user = PostModel(
@@ -87,9 +90,11 @@ class PostFragment : BaseFragment() {
           .document()
           .set(user)
           .addOnSuccessListener {
+            progress_bar.visibility = View.GONE
             Toast.makeText(context, "送信成功", Toast.LENGTH_SHORT).show();
           }
           .addOnFailureListener {
+            progress_bar.visibility = View.GONE
             Toast.makeText(context, "送信失敗", Toast.LENGTH_SHORT).show();
           }
       }

@@ -21,6 +21,7 @@ class TimeLineFragment : Fragment(), AdapterView.OnItemClickListener {
   private var db: FirebaseFirestore? = null
   private val postModelList: ArrayList<PostModel>? = ArrayList()
 
+
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
@@ -29,15 +30,17 @@ class TimeLineFragment : Fragment(), AdapterView.OnItemClickListener {
     return inflater.inflate(R.layout.fragment_time_line, container, false)
   }
 
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     this.db = FirebaseFirestore.getInstance()
+    progress_bar.visibility = View.VISIBLE
+
     activity?.actionBar?.title = "タイムライン"
     db!!.collection("posts").get()
       .addOnCompleteListener { task ->
         if (task.isSuccessful) {
           for (document in task.result!!) {
-            val timeLineModel: PostModel =
-              document.toObject(PostModel::class.java)
+            val timeLineModel: PostModel = document.toObject(PostModel::class.java)
             postModelList?.add(timeLineModel)
           }
           val arrayAdapter: BaseAdapter = TimeLineContentsAdapter(
@@ -45,6 +48,7 @@ class TimeLineFragment : Fragment(), AdapterView.OnItemClickListener {
           )
           timelineListView.adapter = arrayAdapter
           timelineListView.onItemClickListener = this
+          progress_bar.visibility = View.GONE
         } else {
           Log.d(
             "MissionActivity",
