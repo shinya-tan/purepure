@@ -17,6 +17,8 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_recommend.*
+import kotlinx.android.synthetic.main.fragment_recommend.screen
+import kotlinx.android.synthetic.main.fragment_time_line.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -40,6 +42,7 @@ class RecommendFragment : BaseFragment() {
 
     super.onCreate(savedInstanceState)
     val db = FirebaseFirestore.getInstance()
+    screen.visibility = View.VISIBLE
     db.collection("posts").get()
       .addOnCompleteListener { task ->
         if (task.isSuccessful) {
@@ -50,7 +53,6 @@ class RecommendFragment : BaseFragment() {
           }
           val shuffled: List<PostModel> = ArrayList(postModelList)
           Collections.shuffle(shuffled)
-
           val result: List<PostModel> = shuffled.subList(0, 3)
           button1.text = result[0].title
           button2.text = result[1].title
@@ -97,6 +99,7 @@ class RecommendFragment : BaseFragment() {
             intent.putExtra("POSITION", postModelList!!.indexOf(result[2]))
             startActivity(intent)
           }
+          screen.visibility = View.GONE
         } else {
           Log.d(
             "MissionActivity",

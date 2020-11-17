@@ -33,7 +33,7 @@ class TimeLineFragment : Fragment(), AdapterView.OnItemClickListener {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     this.db = FirebaseFirestore.getInstance()
-    progress_bar.visibility = View.VISIBLE
+    screen.visibility = View.VISIBLE
 
     activity?.actionBar?.title = "タイムライン"
     db!!.collection("posts").get()
@@ -48,7 +48,7 @@ class TimeLineFragment : Fragment(), AdapterView.OnItemClickListener {
           )
           timelineListView.adapter = arrayAdapter
           timelineListView.onItemClickListener = this
-          progress_bar.visibility = View.GONE
+          screen.visibility = View.GONE
         } else {
           Log.d(
             "MissionActivity",

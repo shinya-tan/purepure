@@ -6,10 +6,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -22,7 +19,6 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import kotlinx.android.synthetic.main.fragment_post.*
 import kotlinx.android.synthetic.main.fragment_post.progress_bar
-import kotlinx.android.synthetic.main.fragment_time_line.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -79,7 +75,7 @@ class PostFragment : BaseFragment() {
       val storageRef = Firebase.storage.reference
       val riversRef = storageRef.child("images/${path!!.lastPathSegment}")
       val uploadTask = riversRef.putFile(path!!)
-      progress_bar.visibility = View.VISIBLE
+      screen.visibility = View.VISIBLE
       uploadTask.addOnSuccessListener {
         val db = FirebaseFirestore.getInstance()
         val user = PostModel(
@@ -90,11 +86,11 @@ class PostFragment : BaseFragment() {
           .document()
           .set(user)
           .addOnSuccessListener {
-            progress_bar.visibility = View.GONE
+            screen.visibility = View.GONE
             Toast.makeText(context, "送信成功", Toast.LENGTH_SHORT).show();
           }
           .addOnFailureListener {
-            progress_bar.visibility = View.GONE
+            screen.visibility = View.GONE
             Toast.makeText(context, "送信失敗", Toast.LENGTH_SHORT).show();
           }
       }
