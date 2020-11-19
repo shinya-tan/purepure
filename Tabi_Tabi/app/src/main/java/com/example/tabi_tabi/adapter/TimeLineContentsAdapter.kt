@@ -1,38 +1,40 @@
 package com.example.tabi_tabi.adapter
 
+import android.content.ContentValues
 import android.content.Context
-import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import com.example.tabi_tabi.R
 import com.example.tabi_tabi.model.PostModel
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
-import java.io.File
 
 
 class TimeLineContentsAdapter(
     context: Context,
     layoutid: Int,
-    name: ArrayList<PostModel>?
+    name: ArrayList<PostModel>?,
+    documentIdList: ArrayList<String>?
 ) : BaseAdapter() {
     private val mInflater: LayoutInflater =
         context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     private var layoutId: Int = layoutid
     private var nameList: ArrayList<PostModel>? = name
+    private var documentIdList: ArrayList<String>? = documentIdList
     private var storage: FirebaseStorage? = null
     private var storageRef: StorageReference? = null
+    var db: FirebaseFirestore? = null
 
     internal class ViewHolder {
         var text: TextView? = null
         var email: TextView? = null
         var image: ImageView? = null
+        var like_button: ImageView? = null
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -48,6 +50,7 @@ class TimeLineContentsAdapter(
             holder.text = convertView.findViewById(R.id.text_view)
             holder.email = convertView.findViewById(R.id.text_mail)
             holder.image = convertView.findViewById(R.id.img_item)
+            holder.like_button = convertView.findViewById(R.id.like_button)
             convertView.tag = holder
         } else {
             holder = convertView.tag as ViewHolder
@@ -63,7 +66,18 @@ class TimeLineContentsAdapter(
                     .into(holder.image)
             }
         }
-        holder.email!!.text = nameList!![position].title
+
+        holder.like_button!!.setOnClickListener{
+            Log.d(ContentValues.TAG, "nameList.likeの中身 :")
+            Log.d(ContentValues.TAG, nameList!![position].like.toString())
+            this.db = FirebaseFirestore.getInstance()
+            val washingtonRef = db!!.collection("posts").document(documentIdList!![position])
+            washingtonRef
+                .update("like", nameList!![position].like?.plus(1))
+
+            Log.d(ContentValues.TAG, "nameList.likeの中身 :")
+            Log.d(ContentValues.TAG, nameList!![position].like.toString())
+        }
 
         holder.text!!.text = nameList!![position].description
 
@@ -84,4 +98,5 @@ class TimeLineContentsAdapter(
         }
         return 0
     }
+
 }

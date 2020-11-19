@@ -81,7 +81,7 @@ class PostFragment : BaseFragment() {
         val db = FirebaseFirestore.getInstance()
         val user = PostModel(
           titletext, posttext, location, altitude, createdAt,
-          "images/${path!!.lastPathSegment}", "usrID"
+          "images/${path!!.lastPathSegment}", "usrID",0
         )
         db.collection("posts")
           .document()
