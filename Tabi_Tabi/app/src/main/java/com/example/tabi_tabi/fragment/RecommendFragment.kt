@@ -19,6 +19,8 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_recommend.*
+import kotlinx.android.synthetic.main.fragment_recommend.screen
+import kotlinx.android.synthetic.main.fragment_time_line.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -43,6 +45,7 @@ class RecommendFragment : BaseFragment() {
 
     super.onCreate(savedInstanceState)
     val database = FirebaseFirestore.getInstance()
+    screen.visibility = View.VISIBLE
     database.collection("posts").orderBy("like")
       .get()
       .addOnCompleteListener { task ->
@@ -70,7 +73,6 @@ class RecommendFragment : BaseFragment() {
           button1.text = result[MaxListNumber - 1].title
           button2.text = result[MaxListNumber - 2].title
           button3.text = result[0].title
-
           val storage = Firebase.storage.reference
           result[MaxListNumber - 1].content?.let {
             storage.child(it).downloadUrl.addOnSuccessListener { uri ->
@@ -120,6 +122,7 @@ class RecommendFragment : BaseFragment() {
             intent.putExtra("POSITION", postModelListTitle!!.indexOf(result[0].title))
             startActivity(intent)
           }
+          screen.visibility = View.GONE
         } else {
           Log.d(
             "MissionActivity",

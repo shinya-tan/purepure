@@ -25,6 +25,7 @@ class TimeLineFragment : Fragment(), AdapterView.OnItemClickListener {
   private var documentIdList: ArrayList<String> = ArrayList()
 
 
+
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
@@ -35,6 +36,8 @@ class TimeLineFragment : Fragment(), AdapterView.OnItemClickListener {
 
   override fun onViewCreated(view: View1, savedInstanceState: Bundle?) {
     this.db = FirebaseFirestore.getInstance()
+    screen.visibility = View1.VISIBLE
+
     activity?.actionBar?.title = "タイムライン"
     db!!.collection("posts").get()
       .addOnCompleteListener { task ->
@@ -52,6 +55,7 @@ class TimeLineFragment : Fragment(), AdapterView.OnItemClickListener {
           )
           timelineListView.adapter = arrayAdapter
           timelineListView.onItemClickListener = this
+          screen.visibility = View1.GONE
         } else {
           Log.d(
             "MissionActivity",
