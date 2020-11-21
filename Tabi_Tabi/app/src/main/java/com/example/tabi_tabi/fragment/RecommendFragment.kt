@@ -24,7 +24,8 @@ import kotlin.collections.ArrayList
 
 
 class RecommendFragment : BaseFragment() {
-  private val postModelList: ArrayList<PostModel>? = ArrayList()
+  private val postModelListOrderByLike: ArrayList<PostModel>? = ArrayList()
+  private val postModelListTitle: ArrayList<String?>? = ArrayList()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -41,32 +42,37 @@ class RecommendFragment : BaseFragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
     super.onCreate(savedInstanceState)
-    val db = FirebaseFirestore.getInstance()
-    //db.collection("posts").get()
-//      .addOnCompleteListener { task ->
-//        if (task.isSuccessful) {
-//          for (document in task.result!!) {
-//            val timeLineModel: PostModel =
-//              document.toObject(PostModel::class.java)
-//            postModelList!!.add(timeLineModel)
-//          }
-    db.collection("posts").orderBy("like")
+    val database = FirebaseFirestore.getInstance()
+    database.collection("posts").orderBy("like")
       .get()
       .addOnCompleteListener { task ->
         if (task.isSuccessful) {
           for (document in task.result!!) {
             val timeLineModel: PostModel =
               document.toObject(PostModel::class.java)
-            postModelList!!.add(timeLineModel)
+            postModelListOrderByLike!!.add(timeLineModel)
           }
-          val shuffled: List<PostModel> = ArrayList(postModelList)
+          val shuffled: List<PostModel> = ArrayList(postModelListOrderByLike)
           val result: List<PostModel> = shuffled
-          var MaxListNumber :Int = shuffled.count()
-          button1.text = result[MaxListNumber-1].title
-          button2.text = result[MaxListNumber -2].title
+          var MaxListNumber: Int = result.count()
+
+          database.collection("posts")
+            .get()
+            .addOnCompleteListener { task ->
+              if (task.isSuccessful) {
+                for (document in task.result!!) {
+                  val timeLineModel: PostModel =
+                    document.toObject(PostModel::class.java)
+                  postModelListTitle!!.add(timeLineModel.title)
+                }
+              }
+            }
+          button1.text = result[MaxListNumber - 1].title
+          button2.text = result[MaxListNumber - 2].title
           button3.text = result[0].title
+
           val storage = Firebase.storage.reference
-          result[MaxListNumber-1].content?.let {
+          result[MaxListNumber - 1].content?.let {
             storage.child(it).downloadUrl.addOnSuccessListener { uri ->
               Log.d("image", uri.toString())
               Picasso.get()
@@ -76,7 +82,7 @@ class RecommendFragment : BaseFragment() {
                 .into(image_view1)
             }
           }
-          result[MaxListNumber -2].content?.let {
+          result[MaxListNumber - 2].content?.let {
             storage.child(it).downloadUrl.addOnSuccessListener { uri ->
               Log.d("image", uri.toString())
               Picasso.get()
@@ -86,26 +92,32 @@ class RecommendFragment : BaseFragment() {
                 .into(image_view2)
             }
           }
+
           button1.setOnClickListener {
             val intent = Intent(context, MapsActivity::class.java)
-            intent.putExtra("DB_LAT", result[MaxListNumber-1].location!!.latitude)
-            intent.putExtra("DB_LNG", result[MaxListNumber-1].location!!.longitude)
-            intent.putExtra("POSITION", postModelList!!.indexOf(result[MaxListNumber-1]))
-            Log.w(TAG,result[MaxListNumber-1].title.toString())
+            intent.putExtra("DB_LAT", result[MaxListNumber - 1].location!!.latitude)
+            intent.putExtra("DB_LNG", result[MaxListNumber - 1].location!!.longitude)
+            intent.putExtra(
+              "POSITION",
+              postModelListTitle!!.indexOf(result[MaxListNumber - 1].title)
+            )
             startActivity(intent)
           }
           button2.setOnClickListener {
             val intent = Intent(context, MapsActivity::class.java)
-            intent.putExtra("DB_LAT", result[0].location!!.latitude)
-            intent.putExtra("DB_LNG", result[0].location!!.longitude)
-            intent.putExtra("POSITION", postModelList!!.indexOf(result[0]))
+            intent.putExtra("DB_LAT", result[MaxListNumber - 2].location!!.latitude)
+            intent.putExtra("DB_LNG", result[MaxListNumber - 2].location!!.longitude)
+            intent.putExtra(
+              "POSITION",
+              postModelListTitle!!.indexOf(result[MaxListNumber - 2].title)
+            )
             startActivity(intent)
           }
           button3.setOnClickListener {
             val intent = Intent(context, MapsActivity::class.java)
-            intent.putExtra("DB_LAT", result[MaxListNumber -2].location!!.latitude)
-            intent.putExtra("DB_LNG", result[MaxListNumber -2].location!!.longitude)
-            intent.putExtra("POSITION", postModelList!!.indexOf(result[MaxListNumber -2]))
+            intent.putExtra("DB_LAT", result[0].location!!.latitude)
+            intent.putExtra("DB_LNG", result[0].location!!.longitude)
+            intent.putExtra("POSITION", postModelListTitle!!.indexOf(result[0].title))
             startActivity(intent)
           }
         } else {

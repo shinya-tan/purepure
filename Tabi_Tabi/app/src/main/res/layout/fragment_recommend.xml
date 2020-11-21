@@ -12,7 +12,8 @@
         android:layout_height="match_parent"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="ExtraText">
 
         <ImageView
             android:id="@+id/image_view1"
@@ -20,7 +21,6 @@
             android:layout_height="100dp"
             android:layout_marginTop="40dp"
             android:scaleType="center"
-            android:src="@drawable/download1"
             tools:layout_editor_absoluteX="43dp"
             tools:layout_editor_absoluteY="-1dp" />
 
@@ -111,4 +111,35 @@
             app:layout_constraintVertical_bias="0.8" />
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#30000000"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="140dp"
+            android:layout_marginTop="350dp"
+            android:layout_marginEnd="140dp"
+            android:background="#ffffff"
+            android:text="読み込み中"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="170dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="170dp" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
