@@ -3,15 +3,25 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
+    packagingOptions {
+        exclude 'google/protobuf/*.proto'
+        exclude 'play-services-tasks.properties'
+        exclude 'play-services-measurement-api.properties'
+    }
+
     defaultConfig {
         applicationId "com.example.tabi_tabi"
-        minSdkVersion 21
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0"
+        versionName "0.1"
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
+        }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 //        manifestPlaceholders = [api_key: System.getenv("APIKEY")]
     }
@@ -29,18 +39,54 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    aaptOptions {
+        noCompress = ['.unity3d', '.ress', '.resource', '.obb', 'google-services-desktop.json']
+        ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~"
+    }
+
+    sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    packagingOptions {
+        doNotStrip '*/armeabi-v7a/*.so'
+        doNotStrip '*/arm64-v8a/*.so'
+    }
+    bundle {
+        language {
+            enableSplit = false
+        }
+        density {
+            enableSplit = false
+        }
+        abi {
+            enableSplit = true
+        }
+    }
 }
 
 dependencies {
-    implementation 'com.google.android.gms:play-services-location:17.1.0'
-    implementation 'com.google.firebase:firebase-firestore:22.0.0'
-    implementation 'com.google.firebase:firebase-database-ktx:19.5.1'
-    implementation 'com.google.firebase:firebase-core:18.0.0'
+    implementation project(':unityLibrary-release')
+    implementation project(':FirebaseApp.androidlib')
+    implementation(name: 'com.google.firebase.firebase-app-unity-6.16.1', ext: 'aar')
+    implementation(name: 'com.google.firebase.firebase-firestore-unity-6.16.1', ext: 'aar')
+    implementation(name: 'com.google.firebase.firebase-storage-unity-6.16.1', ext: 'aar')
+    implementation(name: 'com.google.firebase.firebase-auth-unity-6.16.1', ext: 'aar')
+
+    implementation(name: 'arcore_client', ext: 'aar')
+    implementation(name: 'arcore_rendering_utils', ext: 'aar')
+    implementation(name: 'arcore_unity', ext: 'aar')
+    implementation(name: 'unityandroidpermissions', ext: 'aar')
+    implementation(name: 'google_ar_required', ext: 'aar')
+    implementation(name: 'unitygar', ext: 'aar')
+
     implementation 'com.google.firebase:firebase-analytics-ktx'
-    implementation 'com.google.firebase:firebase-storage-ktx'
+    implementation 'com.google.android.gms:play-services-location:17.1.0'
+    implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation platform('com.google.firebase:firebase-bom:25.12.0')
-    implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
@@ -49,9 +95,13 @@ dependencies {
     implementation 'com.beardedhen:androidbootstrap:2.3.2'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'com.google.android.gms:play-services-basement:17.5.0'
-    implementation 'com.google.firebase:firebase-storage:19.1.1'
+    implementation 'com.google.firebase:firebase-storage-ktx'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    testImplementation 'junit:junit:4.12'
+    implementation 'com.google.firebase:firebase-firestore-ktx:22.0.0'
+    implementation 'com.google.firebase:firebase-storage-ktx:19.2.0'
+    testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
 }
+

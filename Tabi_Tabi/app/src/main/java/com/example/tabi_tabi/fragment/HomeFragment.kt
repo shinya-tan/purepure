@@ -1,6 +1,7 @@
 package com.example.tabi_tabi.fragment
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.tabi_tabi.R
 import com.google.firebase.firestore.FirebaseFirestore
+import com.unity3d.player.UnityPlayerActivity
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
@@ -81,6 +83,10 @@ class HomeFragment : Fragment() {
 
 
         image_sun.setColorFilter(Color.parseColor("#F44336"), PorterDuff.Mode.SRC_IN)
+        button1.setOnClickListener {
+            val intent = Intent(context, UnityPlayerActivity::class.java)
+            startActivity(intent)
+        }
 
 
     }
