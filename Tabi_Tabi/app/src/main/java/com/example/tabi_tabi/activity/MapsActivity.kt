@@ -80,14 +80,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
             position: Int,
             location: GeoPoint
           ) {
-            mMap.moveCamera(
-              CameraUpdateFactory.newLatLngZoom(
-                LatLng(
-                  location.latitude,
-                  location.longitude
-                ), 20.0f
-              )
-            )
+//            mMap.moveCamera(
+//              CameraUpdateFactory.newLatLngZoom(
+//                LatLng(
+//                  location.latitude,
+//                  location.longitude
+//                ), 4.0f
+//              )
+//            )
             markerList[position].showInfoWindow()
           }
         })
@@ -119,6 +119,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
             .title(
               document.get("title").toString()
             )
+        )
+      mMap
+        .moveCamera(
+          CameraUpdateFactory.newLatLngZoom(
+            LatLng(geo!!.latitude, geo!!.longitude),
+            10.0f
+          )
         )
       markerList.add(marker)
       mMap.setOnMarkerClickListener { marker ->
@@ -156,7 +163,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
           LatLng(
             selectLat!!,
             selectLng!!
-          ), 20f
+          ), 16f
         )
       )
     } else {

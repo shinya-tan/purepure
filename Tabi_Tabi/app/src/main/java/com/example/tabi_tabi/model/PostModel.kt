@@ -14,6 +14,7 @@ class PostModel : Serializable {
   var createdAt: String? = null
   var content: String? = null
   var userId: String? = null
+  var like: Int? = null
 
 
   constructor()
@@ -24,7 +25,8 @@ class PostModel : Serializable {
     altitude: Double?,
     createdAt: String?,
     content: String?,
-    userId: String?
+    userId: String?,
+    like: Int?
   ) {
     this.title = title
     this.description = descriptor
@@ -33,5 +35,6 @@ class PostModel : Serializable {
     this.createdAt = createdAt
     this.content = content
     this.userId = userId
+    this.like = 0
   }
 }
