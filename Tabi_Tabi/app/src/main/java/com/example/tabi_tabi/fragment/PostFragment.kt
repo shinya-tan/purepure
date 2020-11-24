@@ -6,7 +6,10 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,11 +17,12 @@ import com.example.tabi_tabi.R
 import com.example.tabi_tabi.model.PostModel
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.maps.model.LatLng
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import kotlinx.android.synthetic.main.fragment_post.*
-import kotlinx.android.synthetic.main.fragment_post.progress_bar
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -29,6 +33,7 @@ class PostFragment : BaseFragment() {
   private var latitude: Double? = null
   private var longitude: Double? = null
   private var path: Uri? = null
+  private lateinit var auth: FirebaseAuth
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -47,6 +52,8 @@ class PostFragment : BaseFragment() {
       Log.d(ContentValues.TAG, "# No location data.")
       return
     }
+    auth = Firebase.auth
+
 
     // 緯度・経度を取得
     latitude = locationResult.lastLocation.latitude
@@ -75,22 +82,19 @@ class PostFragment : BaseFragment() {
       val storageRef = Firebase.storage.reference
       val riversRef = storageRef.child("images/${path!!.lastPathSegment}")
       val uploadTask = riversRef.putFile(path!!)
-      screen.visibility = View.VISIBLE
       uploadTask.addOnSuccessListener {
         val db = FirebaseFirestore.getInstance()
         val user = PostModel(
           titletext, posttext, location, altitude, createdAt,
-          "images/${path!!.lastPathSegment}", "usrID",0
+          "images/${path!!.lastPathSegment}", auth.uid, 0
         )
         db.collection("posts")
           .document()
           .set(user)
           .addOnSuccessListener {
-            screen.visibility = View.GONE
             Toast.makeText(context, "送信成功", Toast.LENGTH_SHORT).show();
           }
           .addOnFailureListener {
-            screen.visibility = View.GONE
             Toast.makeText(context, "送信失敗", Toast.LENGTH_SHORT).show();
           }
       }

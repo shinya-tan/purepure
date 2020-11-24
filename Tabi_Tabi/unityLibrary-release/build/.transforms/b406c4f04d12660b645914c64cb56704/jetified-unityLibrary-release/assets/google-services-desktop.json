@@ -37,38 +37,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:272235859479:android:1c575931319cc6b42e5652",
+        "mobilesdk_app_id": "1:272235859479:android:8997cb5cf942d8552e5652",
         "android_client_info": {
-          "package_name": "com.prepre.tabitabiAR"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "272235859479-so14dvs0a2q5f54ceue119r5vaudfejg.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAzKaukTI01CorgaHuhzyvPyUrkrjrMYlI"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "272235859479-so14dvs0a2q5f54ceue119r5vaudfejg.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:272235859479:android:3e2e8f6dac50b9452e5652",
-        "android_client_info": {
-          "package_name": "unity.prepre.tabitabiAR"
+          "package_name": "com.example.tabi_tabi_ar"
         }
       },
       "oauth_client": [

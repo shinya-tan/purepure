@@ -11,17 +11,13 @@ import com.example.tabi_tabi.R
 import com.example.tabi_tabi.activity.MapsActivity
 import com.example.tabi_tabi.model.PostModel
 import com.google.android.gms.location.LocationResult
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_recommend.*
 import kotlinx.android.synthetic.main.fragment_recommend.screen
 import kotlinx.android.synthetic.main.fragment_time_line.*
-import java.util.*
 import kotlin.collections.ArrayList
 
 
