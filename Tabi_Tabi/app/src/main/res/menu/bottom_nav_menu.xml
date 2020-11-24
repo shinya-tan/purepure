@@ -21,4 +21,9 @@
         android:icon="@android:drawable/ic_dialog_map"
         android:title="検索" />
 
+    <item
+        android:id="@+id/navigation_AR"
+        android:icon="@android:drawable/arrow_up_float"
+        android:title="AR" />
+
 </menu>

@@ -14,6 +14,7 @@ import com.example.tabi_tabi.fragment.RecommendFragment
 import com.example.tabi_tabi.fragment.TimeLineFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import com.example.tabi_tabi.activity.MapsActivity
+import com.unity3d.player.UnityPlayerActivity
 
 class MainActivity : AppCompatActivity() {
     private val recommendFragment = RecommendFragment()
@@ -47,6 +48,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.navigation_searchpost -> {
                     val intent = Intent(applicationContext, MapsActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.navigation_AR -> {
+                    val intent = Intent(applicationContext, UnityPlayerActivity::class.java)
                     startActivity(intent)
                 }
             }
