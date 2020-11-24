@@ -83,12 +83,6 @@ class HomeFragment : Fragment() {
 
 
         image_sun.setColorFilter(Color.parseColor("#F44336"), PorterDuff.Mode.SRC_IN)
-        button1.setOnClickListener {
-            val intent = Intent(context, UnityPlayerActivity::class.java)
-            startActivity(intent)
-        }
-
-
     }
 
 
