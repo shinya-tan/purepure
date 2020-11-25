@@ -20,7 +20,7 @@ android {
         versionCode 1
         versionName "0.1"
         ndk {
-            abiFilters 'armeabi-v7a', 'arm64-v8a'
+            abiFilters 'armeabi-v7a', 'arm64-v8a','x86'
         }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 //        manifestPlaceholders = [api_key: System.getenv("APIKEY")]
