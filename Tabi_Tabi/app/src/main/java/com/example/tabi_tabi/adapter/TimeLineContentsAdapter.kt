@@ -3,10 +3,14 @@ package com.example.tabi_tabi.adapter
 import android.content.ContentValues
 import android.content.Context
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.BaseAdapter
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import com.example.tabi_tabi.R
 import com.example.tabi_tabi.model.PostModel
 import com.google.firebase.firestore.FirebaseFirestore
@@ -28,12 +32,14 @@ class TimeLineContentsAdapter(
   private var storage: FirebaseStorage? = null
   private var storageRef: StorageReference? = null
   var db: FirebaseFirestore? = null
+  private var context = context
 
   internal class ViewHolder {
     var text: TextView? = null
     var email: TextView? = null
     var image: ImageView? = null
     var like_button: ImageView? = null
+    var like_number: TextView? = null
   }
 
   override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -50,6 +56,7 @@ class TimeLineContentsAdapter(
       holder.email = convertView.findViewById(R.id.text_mail)
       holder.image = convertView.findViewById(R.id.img_item)
       holder.like_button = convertView.findViewById(R.id.like_button)
+      holder.like_number = convertView.findViewById(R.id.like_number)
       convertView.tag = holder
     } else {
       holder = convertView.tag as ViewHolder
@@ -65,20 +72,25 @@ class TimeLineContentsAdapter(
           .into(holder.image)
       }
     }
-
-    holder.like_button!!.setOnClickListener {
-      Log.d(ContentValues.TAG, "nameList.likeの中身 :")
-      Log.d(ContentValues.TAG, nameList!![position].like.toString())
-      this.db = FirebaseFirestore.getInstance()
-      val washingtonRef = db!!.collection("posts").document(documentIdList!![position])
-      washingtonRef
-        .update("like", nameList!![position].like?.plus(1))
-
-      Log.d(ContentValues.TAG, "nameList.likeの中身 :")
-      Log.d(ContentValues.TAG, nameList!![position].like.toString())
-    }
-
     holder.text!!.text = nameList!![position].description
+    holder.like_number!!.text = nameList!![position].like.toString()
+
+
+  holder.like_button!!.setOnClickListener {
+//      Log.d(ContentValues.TAG, "nameList.likeの中身 :")
+//      Log.d(ContentValues.TAG, nameList!![position].like.toString())
+    val toast = Toast.makeText(context, "いいねしました", Toast.LENGTH_LONG)
+    toast.setGravity(Gravity.CENTER, 3,3)
+    toast.show()
+
+    this.db = FirebaseFirestore.getInstance()
+    val washingtonRef = db!!.collection("posts").document(documentIdList!![position])
+    washingtonRef
+      .update("like", nameList!![position].like?.plus(1))
+    holder.like_number!!.text = nameList!![position].like?.plus(1).toString()
+    nameList!![position].like?.toString()?.let { it1 -> Log.d(ContentValues.TAG, it1) }
+  }
+
 
     return convertView!!
   }

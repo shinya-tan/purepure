@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.BaseAdapter
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.example.tabi_tabi.R
 import com.example.tabi_tabi.activity.MapsActivity
@@ -21,7 +20,7 @@ import android.view.View as View1
 
 class TimeLineFragment : Fragment(), AdapterView.OnItemClickListener {
   private var db: FirebaseFirestore? = null
-  private val postModelList: ArrayList<PostModel>? = ArrayList()
+  private var postModelList: ArrayList<PostModel>? = ArrayList()
   private var documentIdList: ArrayList<String> = ArrayList()
 
 
@@ -39,6 +38,8 @@ class TimeLineFragment : Fragment(), AdapterView.OnItemClickListener {
     screen.visibility = View1.VISIBLE
 
     activity?.actionBar?.title = "タイムライン"
+    postModelList = null
+    postModelList = ArrayList()
     db!!.collection("posts").get()
       .addOnCompleteListener { task ->
         if (task.isSuccessful) {
@@ -69,7 +70,7 @@ class TimeLineFragment : Fragment(), AdapterView.OnItemClickListener {
   override fun onItemClick(p0: AdapterView<*>?, p1: View1?, p2: Int, p3: Long) {
     val intent = Intent(context, MapsActivity::class.java)
     intent.putExtra("DB_LAT", postModelList!![p2].location!!.latitude)
-    intent.putExtra("DB_LNG", postModelList[p2].location!!.longitude)
+    intent.putExtra("DB_LNG", postModelList!![p2].location!!.longitude)
     intent.putExtra("POSITION", p2)
     startActivity(intent)
   }
