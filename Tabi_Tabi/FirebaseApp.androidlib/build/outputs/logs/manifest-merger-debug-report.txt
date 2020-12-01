@@ -1,12 +1,12 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml:2:1-6:12
-INJECTED from /Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml:2:1-6:12
-INJECTED from /Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml:2:1-6:12
-INJECTED from /Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml:2:1-6:12
-INJECTED from /Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml:2:1-6:12
-INJECTED from /Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml:2:1-6:12
-INJECTED from /Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml:2:1-6:12
+ADDED from /Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml:2:1-9:12
+INJECTED from /Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml:2:1-9:12
+INJECTED from /Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml:2:1-9:12
+INJECTED from /Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml:2:1-9:12
+INJECTED from /Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml:2:1-9:12
+INJECTED from /Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml:2:1-9:12
+INJECTED from /Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml:2:1-9:12
 	package
 		ADDED from /Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml:3:11-50
 		INJECTED from /Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml
@@ -21,6 +21,10 @@ INJECTED from /Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidMa
 		ADDED from /Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml:4:11-34
 		INJECTED from /Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml
 		INJECTED from /Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml
+uses-permission#android.permission.INTERNET
+ADDED from /Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml:6:5-7:54
+	android:name
+		ADDED from /Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml:7:9-51
 uses-sdk
 INJECTED from /Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml
