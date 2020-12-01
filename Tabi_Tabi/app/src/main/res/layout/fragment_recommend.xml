@@ -45,7 +45,6 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginTop="40dp"
-            android:src="@drawable/unnamed"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="296dp" />
 
@@ -71,7 +70,7 @@
         android:layout_height="fill_parent"
         android:layout_marginTop="400dp"
         android:layout_marginBottom="30dp"
-        android:background="#afeeee"
+        android:background="#f0f0f0"
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
 
@@ -101,7 +100,7 @@
             android:layout_below="@id/minor"
             android:layout_marginStart="50dp"
             android:layout_marginEnd="50dp"
-            android:background="@drawable/frame_minor"
+            android:background="@drawable/frame"
             android:text="新屋家"
             android:textSize="35sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -116,7 +115,7 @@
         android:id="@+id/screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#30000000"
+        android:background="#8C8C8C"
         android:orientation="vertical"
         android:visibility="gone">
 

@@ -6,8 +6,8 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="1"
-8-->/Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml
+8-->/Users/shinya_tan/school/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml
 9        android:targetSdkVersion="9" />
-9-->/Users/e185702/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml
+9-->/Users/shinya_tan/school/purepure/Tabi_Tabi/FirebaseApp.androidlib/AndroidManifest.xml
 10
 11</manifest>
