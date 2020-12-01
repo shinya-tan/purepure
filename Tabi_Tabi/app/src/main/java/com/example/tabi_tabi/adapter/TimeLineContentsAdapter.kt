@@ -48,7 +48,6 @@ class TimeLineContentsAdapter(
     var text: TextView? = null
     var email: TextView? = null
     var name: TextView? = null
-    var icon: ImageView? = null
     var image: ImageView? = null
     var like_button: ImageView? = null
     var like_number: TextView? = null
@@ -70,15 +69,13 @@ class TimeLineContentsAdapter(
       holder.email = convertView.findViewById(R.id.text_mail)
       holder.image = convertView.findViewById(R.id.img_item)
       holder.like_button = convertView.findViewById(R.id.like_button)
-      holder.name = convertView.findViewById(R.id.text_name)
-      holder.icon = convertView.findViewById(R.id.img_icon)
       holder.like_number = convertView.findViewById(R.id.like_number)
       convertView.tag = holder
     } else {
       holder = convertView.tag as ViewHolder
     }
-    holder.name!!.text = userList!![position].name
-    Picasso.get().load(Uri.parse(userList!![position].icon)).fit().centerCrop().into(holder.icon)
+    holder.username!!.text = userList!![position].name
+    Picasso.get().load(Uri.parse(userList!![position].icon)).fit().centerCrop().into(holder.userimage)
     nameList!![position].content?.let {
       storageRef!!.child(it).downloadUrl.addOnSuccessListener { uri ->
         Log.d("image", uri.toString())
@@ -87,17 +84,6 @@ class TimeLineContentsAdapter(
           .fit()
           .centerCrop()
           .into(holder.image)
-
-      }
-    }
-    nameList!![position].content?.let {
-      storageRef!!.child(it).downloadUrl.addOnSuccessListener { uri ->
-        Log.d("userimage", uri.toString())
-        Picasso.get()
-          .load(uri)
-          .fit()
-          .centerCrop()
-          .into(holder.userimage)
 
       }
     }
