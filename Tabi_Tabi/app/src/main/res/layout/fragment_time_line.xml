@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_light"
+    android:background="@android:color/darker_gray"
     tools:context=".fragment.TimeLineFragment">
 
         <ListView
             android:id="@+id/timelineListView"
             android:layout_width="match_parent"
-            android:layout_height="600dp"
+            android:layout_height="625dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintVertical_bias="0"
             tools:ignore="MissingConstraints">
 
         </ListView>
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="#30000000"
+            android:background="#8C8C8C"
             android:visibility="gone">
 
                 <TextView
