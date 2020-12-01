@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tabi_tabi.R
+import com.example.tabi_tabi.model.UserModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -15,11 +16,13 @@ import com.google.firebase.ktx.Firebase
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
 
   private lateinit var auth: FirebaseAuth
+  var db: FirebaseFirestore? = null
 
   private lateinit var googleSignInClient: GoogleSignInClient
 
@@ -75,12 +78,27 @@ class LoginActivity : AppCompatActivity() {
     auth.signInWithCredential(credential)
       .addOnCompleteListener(this) { task ->
         if (task.isSuccessful) {
-          Log.d(TAG, "signInWithCredential:success")
-          val user = auth.currentUser
-          Toast.makeText(this, "Login成功", Toast.LENGTH_SHORT).show()
-          val intent = Intent(applicationContext, MainActivity::class.java)
-          startActivity(intent)
-          finish()
+          val user = UserModel(
+            auth.currentUser!!.displayName,
+            auth.currentUser!!.email,
+            auth.currentUser!!.uid,
+            auth.currentUser!!.photoUrl.toString()
+          )
+
+          this.db = FirebaseFirestore.getInstance()
+          db!!.collection("users")
+            .document()
+            .set(user)
+            .addOnSuccessListener {
+              Log.d(TAG, "signInWithCredential:success")
+              Toast.makeText(this, "Login成功", Toast.LENGTH_SHORT).show()
+              val intent = Intent(applicationContext, MainActivity::class.java)
+              startActivity(intent)
+              finish()
+            }
+            .addOnFailureListener {
+            }
+
         } else {
           Log.w(TAG, "signInWithCredential:failure", task.exception)
           Toast.makeText(this, "Login失敗", Toast.LENGTH_SHORT).show()

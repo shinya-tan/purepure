@@ -35,6 +35,6 @@ class PostModel : Serializable {
     this.createdAt = createdAt
     this.content = content
     this.userId = userId
-    this.like = 0
+    this.like = like
   }
 }
