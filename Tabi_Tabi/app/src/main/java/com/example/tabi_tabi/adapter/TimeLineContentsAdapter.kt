@@ -43,6 +43,8 @@ class TimeLineContentsAdapter(
   var db: FirebaseFirestore? = null
 
   internal class ViewHolder {
+    var userimage: ImageView? = null
+    var username: TextView? = null
     var text: TextView? = null
     var email: TextView? = null
     var name: TextView? = null
@@ -62,6 +64,8 @@ class TimeLineContentsAdapter(
     if (convertView == null) {
       convertView = mInflater.inflate(layoutId, null)
       holder = ViewHolder()
+      holder.userimage = convertView.findViewById(R.id.user_image)
+      holder.username = convertView.findViewById(R.id.text_username)
       holder.text = convertView.findViewById(R.id.text_view)
       holder.email = convertView.findViewById(R.id.text_mail)
       holder.image = convertView.findViewById(R.id.img_item)
@@ -83,9 +87,22 @@ class TimeLineContentsAdapter(
           .fit()
           .centerCrop()
           .into(holder.image)
+
+      }
+    }
+    nameList!![position].content?.let {
+      storageRef!!.child(it).downloadUrl.addOnSuccessListener { uri ->
+        Log.d("userimage", uri.toString())
+        Picasso.get()
+          .load(uri)
+          .fit()
+          .centerCrop()
+          .into(holder.userimage)
+
       }
     }
     holder.text!!.text = nameList!![position].description
+    holder.email!!.text = nameList!![position].title
     holder.like_number!!.text = nameList!![position].like.toString()
 
 
