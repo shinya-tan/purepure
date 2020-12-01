@@ -37,11 +37,12 @@ class HomeFragment : BaseFragment() {
   var input: String? = null
 
   var arrayAdapter: ArrayAdapter<String>? = null
+  var arrayList: ArrayList<String>? = ArrayList()
 
   private var latitude: Double? = null
   private var longitude: Double? = null
 
-  var isFirst :Boolean = true
+  var isFirst: Boolean = true
   private lateinit var auth: FirebaseAuth
 
   override fun onLocationResult(locationResult: LocationResult?) {
@@ -85,43 +86,44 @@ class HomeFragment : BaseFragment() {
   }
 
   fun getWeather(latLng: LatLng) {
-   if(isFirst ) {
-     val requestURL =
-       "https://api.openweathermap.org/data/2.5/find?lat=${latLng.latitude}&lon=${latLng.longitude}&cnt=1&APPID=c9f50f3f23aab1a0695c0a7758b4f1e2"
-     val url = URL(requestURL)
-     val `is` = url.openConnection().getInputStream()
-     val reader = BufferedReader(InputStreamReader(`is`, "UTF-8"))
-     val sb = StringBuilder()
-     var line: String?
-     while (null != reader.readLine().also { line = it }) {
-       sb.append(line)
-     }
-     var listwed: ArrayList<String> = ArrayList()
-     var data = sb.split("[")
-     var weddata = data[2].split(",")
-     for (document in weddata) {
-       listwed?.add(document.split(":").toString())
-     }
-     val handler = Handler(Looper.getMainLooper())
-     handler.post{
-       var weatherDescriptionList: MutableList<String> = listwed[2].split(",").toMutableList()
-       weatherDescriptionList[1] = weatherDescriptionList[1].drop(2)
-       weatherDescriptionList[1] = weatherDescriptionList[1].dropLast(2)
-       if (weatherDescriptionList[1].equals("overcast clouds")) {
-         println("どんよりとした雲")
-       }
-       var weatherIconList: MutableList<String> = listwed[3].split(",").toMutableList()
-       weatherIconList[1] = weatherIconList[1].drop(2)
-       weatherIconList[1] = weatherIconList[1].dropLast(7)
-       Picasso.get()
-         .load("https://openweathermap.org/img/w/" + weatherIconList[1] + ".png")
-         .fit()
-         .centerCrop()
-         .into(image_wedther)
-       isFirst = false
-     }
-   }
+    if (isFirst) {
+      val requestURL =
+        "https://api.openweathermap.org/data/2.5/find?lat=${latLng.latitude}&lon=${latLng.longitude}&cnt=1&APPID=c9f50f3f23aab1a0695c0a7758b4f1e2"
+      val url = URL(requestURL)
+      val `is` = url.openConnection().getInputStream()
+      val reader = BufferedReader(InputStreamReader(`is`, "UTF-8"))
+      val sb = StringBuilder()
+      var line: String?
+      while (null != reader.readLine().also { line = it }) {
+        sb.append(line)
+      }
+      var listwed: ArrayList<String> = ArrayList()
+      var data = sb.split("[")
+      var weddata = data[2].split(",")
+      for (document in weddata) {
+        listwed?.add(document.split(":").toString())
+      }
+      val handler = Handler(Looper.getMainLooper())
+      handler.post {
+        var weatherDescriptionList: MutableList<String> = listwed[2].split(",").toMutableList()
+        weatherDescriptionList[1] = weatherDescriptionList[1].drop(2)
+        weatherDescriptionList[1] = weatherDescriptionList[1].dropLast(2)
+        if (weatherDescriptionList[1].equals("overcast clouds")) {
+          println("どんよりとした雲")
+        }
+        var weatherIconList: MutableList<String> = listwed[3].split(",").toMutableList()
+        weatherIconList[1] = weatherIconList[1].drop(2)
+        weatherIconList[1] = weatherIconList[1].dropLast(7)
+        Picasso.get()
+          .load("https://openweathermap.org/img/w/" + weatherIconList[1] + ".png")
+          .fit()
+          .centerCrop()
+          .into(image_wedther)
+        isFirst = false
+      }
+    }
   }
+
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
@@ -133,47 +135,28 @@ class HomeFragment : BaseFragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
     activity?.actionBar?.title = "Home"
+    arrayList = ArrayList()
     val db = FirebaseFirestore.getInstance()
-    val docRef = db.collection("users").document("SLw7nCxHIaHp2Vt49ndj")
-    docRef.get()
-      .addOnSuccessListener { document ->
-        if (document != null) {
-          Log.d(TAG, "DocumentSnapshot data: ${document.data}")
-          input = document.get("born").toString()
-          Log.d(TAG, "Inputの中身 : $input")
-          this.arrayAdapter = ArrayAdapter<String>(
-            context!!,
-            android.R.layout.simple_list_item_1
-          ).apply {
-            add("test")
-            add(input)
-          }
-          listview1.adapter = arrayAdapter
-          listview2.adapter = arrayAdapter
-        } else {
-          Log.d(TAG, "No such document")
+    db.collection("posts")
+      .get()
+      .addOnSuccessListener { documents ->
+        for (document in documents) {
+          val title = document.get("title").toString()
+          arrayList!!.add(title)
         }
+        this.arrayAdapter = ArrayAdapter<String>(
+          context!!,
+          android.R.layout.simple_list_item_1,
+          arrayList!!
+        )
+        listview1.adapter = arrayAdapter
+        listview2.adapter = arrayAdapter
+
       }
       .addOnFailureListener { exception ->
         Log.d(TAG, "get failed with ", exception)
       }
-    //image_sun.setColorFilter(Color.parseColor("#F44336"), PorterDuff.Mode.SRC_IN)
   }
-
-//  override fun onResume() {
-//    super.onResume()
-//    GlobalScope.launch {
-//      async {
-//        getWeather(
-//          LatLng(
-//            latitude!!,
-//            longitude!!
-//          )
-//        )
-//      }.await()
-//    }
-//
-//  }
 }
 
 
