@@ -13,4 +13,4 @@
 .externalNativeBuild
 .cxx
 /FirebaseApp.androidlib-release/build
-/unityLibrary-release/build
+/unityLibrary-release/build/.transforms

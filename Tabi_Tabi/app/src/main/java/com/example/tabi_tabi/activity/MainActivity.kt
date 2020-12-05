@@ -17,55 +17,54 @@ import com.example.tabi_tabi.activity.MapsActivity
 import com.unity3d.player.UnityPlayerActivity
 
 class MainActivity : AppCompatActivity() {
-    private val recommendFragment = RecommendFragment()
-    private val timeLineFragment = TimeLineFragment()
-    private val postFragment = PostFragment()
+  private val recommendFragment = RecommendFragment()
+  private val timeLineFragment = TimeLineFragment()
+  private val postFragment = PostFragment()
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_main)
 
-        val actionBar: ActionBar? = supportActionBar
-        actionBar?.setDisplayHomeAsUpEnabled(true)
+    val actionBar: ActionBar? = supportActionBar
+    actionBar?.setDisplayHomeAsUpEnabled(true)
 
-        footer.setOnNavigationItemReselectedListener { item ->
-            val fragmentTransaction = supportFragmentManager.beginTransaction()
-            when (item.itemId) {
-                R.id.navigation_recommend -> {
-                    Log.d("test", "next")
-                    fragmentTransaction.replace(R.id.container_fragment, recommendFragment)
-                    supportActionBar!!.show()
-                }
+    footer.setOnNavigationItemReselectedListener { item ->
+      val fragmentTransaction = supportFragmentManager.beginTransaction()
+      when (item.itemId) {
+          R.id.navigation_recommend -> {
+              fragmentTransaction.replace(R.id.container_fragment, recommendFragment)
+              supportActionBar!!.show()
+          }
 
-                R.id.navigation_timeline -> {
-                    fragmentTransaction.replace(R.id.container_fragment, timeLineFragment)
-                    supportActionBar!!.show()
-                }
-                R.id.navigation_search -> {
-                    fragmentTransaction.replace(R.id.container_fragment, postFragment)
-                    supportActionBar!!.show()
-                }
-                R.id.navigation_searchpost -> {
-                    val intent = Intent(applicationContext, MapsActivity::class.java)
-                    startActivity(intent)
-                }
-                R.id.navigation_AR -> {
-                    val intent = Intent(applicationContext, UnityPlayerActivity::class.java)
-                    startActivity(intent)
-                }
-            }
-            fragmentTransaction.addToBackStack(null).commit()
+          R.id.navigation_timeline -> {
+              fragmentTransaction.replace(R.id.container_fragment, timeLineFragment)
+              supportActionBar!!.show()
+          }
+          R.id.navigation_search -> {
+              fragmentTransaction.replace(R.id.container_fragment, postFragment)
+              supportActionBar!!.show()
+          }
+          R.id.navigation_searchpost -> {
+              val intent = Intent(applicationContext, MapsActivity::class.java)
+              startActivity(intent)
+          }
+          R.id.navigation_AR -> {
+              val intent = Intent(applicationContext, UnityPlayerActivity::class.java)
+              startActivity(intent)
+          }
+      }
+      fragmentTransaction.addToBackStack(null).commit()
 
-        }
     }
+  }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id: Int = item.itemId
-        if (id == android.R.id.home) {
-            supportFragmentManager.popBackStack()
-            supportActionBar!!.hide()
-        }
-        return super.onOptionsItemSelected(item)
+  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    val id: Int = item.itemId
+    if (id == android.R.id.home) {
+      supportFragmentManager.popBackStack()
+      supportActionBar!!.hide()
     }
+    return super.onOptionsItemSelected(item)
+  }
 }
