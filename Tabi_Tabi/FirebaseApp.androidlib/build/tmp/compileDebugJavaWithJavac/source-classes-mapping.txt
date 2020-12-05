@@ -1,2 +1,0 @@
-com/google/firebase/app/unity/BuildConfig.java
- com.google.firebase.app.unity.BuildConfig
