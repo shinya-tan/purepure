@@ -12,5 +12,5 @@
 /captures
 .externalNativeBuild
 .cxx
-FirebaseApp.androidlib/build
-unityLibrary-release/build
+/FirebaseApp.androidlib-release/build
+/unityLibrary-release/build
