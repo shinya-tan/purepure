@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
           startActivity(intent)
         }
         R.id.navigation_AR -> {
-          val intent = Intent(applicationContext, UnityActivity::class.java)
+          val intent = Intent(applicationContext, UnityPlayerActivity::class.java)
           startActivity(intent)
         }
       }
@@ -82,9 +82,3 @@ class MainActivity : AppCompatActivity() {
   }
 }
 
-class UnityActivity : UnityPlayerActivity() {
-  override fun onBackPressed() {
-    super.onBackPressed()
-    finish()
-  }
-}
