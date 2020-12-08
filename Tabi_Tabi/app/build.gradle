@@ -69,7 +69,7 @@ android {
 
 dependencies {
     implementation project(':unityLibrary-release')
-    implementation project(':FirebaseApp.androidlib')
+    implementation project(':FirebaseApp.androidlib-release')
     implementation(name: 'com.google.firebase.firebase-app-unity-6.16.1', ext: 'aar')
     implementation(name: 'com.google.firebase.firebase-firestore-unity-6.16.1', ext: 'aar')
     implementation(name: 'com.google.firebase.firebase-storage-unity-6.16.1', ext: 'aar')
