@@ -23,7 +23,6 @@ android {
             abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86'
         }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-//        manifestPlaceholders = [api_key: System.getenv("APIKEY")]
     }
 
     buildTypes {
@@ -69,7 +68,7 @@ android {
 
 dependencies {
     implementation project(':unityLibrary-release')
-    implementation project(':FirebaseApp.androidlib')
+    implementation project(':FirebaseApp.androidlib-release')
     implementation(name: 'com.google.firebase.firebase-app-unity-6.16.1', ext: 'aar')
     implementation(name: 'com.google.firebase.firebase-firestore-unity-6.16.1', ext: 'aar')
     implementation(name: 'com.google.firebase.firebase-storage-unity-6.16.1', ext: 'aar')

@@ -23,6 +23,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_setting.*
 
 
 class TimeLineContentsAdapter(
@@ -75,7 +76,21 @@ class TimeLineContentsAdapter(
       holder = convertView.tag as ViewHolder
     }
     holder.username!!.text = userList!![position].name
-    Picasso.get().load(Uri.parse(userList!![position].icon)).fit().centerCrop().into(holder.userimage)
+    if (Regex("https").containsMatchIn(userList!![position].icon!!)) {
+      Picasso.get().load(userList!![position].icon).fit().centerCrop().into(holder.userimage)
+    } else {
+      userList!![position].icon?.let {
+        storageRef!!.child(it).downloadUrl.addOnSuccessListener { uri ->
+          Log.d("image", uri.toString())
+          Picasso.get()
+            .load(uri)
+            .fit()
+            .centerCrop()
+            .into(holder.userimage)
+
+        }
+      }
+    }
     nameList!![position].content?.let {
       storageRef!!.child(it).downloadUrl.addOnSuccessListener { uri ->
         Log.d("image", uri.toString())
