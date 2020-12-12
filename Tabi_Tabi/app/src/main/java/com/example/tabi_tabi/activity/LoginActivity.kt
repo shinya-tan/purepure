@@ -1,8 +1,10 @@
 package com.example.tabi_tabi.activity
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tabi_tabi.R
@@ -10,14 +12,16 @@ import com.example.tabi_tabi.model.UserModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
-
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.screen
+import kotlinx.android.synthetic.main.fragment_post.*
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -73,7 +77,7 @@ class LoginActivity : AppCompatActivity() {
   }
 
   private fun firebaseAuthWithGoogle(idToken: String) {
-
+    screen.visibility = View.VISIBLE
     val credential = GoogleAuthProvider.getCredential(idToken, null)
     auth.signInWithCredential(credential)
       .addOnCompleteListener(this) { task ->
@@ -85,25 +89,26 @@ class LoginActivity : AppCompatActivity() {
             auth.currentUser!!.photoUrl.toString()
           )
           this.db = FirebaseFirestore.getInstance()
-          db!!.collection("users").whereEqualTo("uid", auth.uid).get()
+          db!!.collection("users").whereEqualTo("uid", auth.currentUser!!.uid).get()
             .addOnSuccessListener {
+              if (it.documents.isEmpty()) {
+                db!!.collection("users")
+                  .document(auth.currentUser!!.uid)
+                  .set(user)
+                  .addOnSuccessListener {
+                    Log.d(TAG, "signInWithCredential:success")
+                  }
+                  .addOnFailureListener {
+                  }
+              }
+              screen.visibility = View.GONE
+              Toast.makeText(this, "Login成功", Toast.LENGTH_SHORT).show()
               val intent = Intent(applicationContext, MainActivity::class.java)
               startActivity(intent)
               finish()
             }
             .addOnFailureListener {
-              db!!.collection("users")
-                .document()
-                .set(user)
-                .addOnSuccessListener {
-                  Log.d(TAG, "signInWithCredential:success")
-                  Toast.makeText(this, "Login成功", Toast.LENGTH_SHORT).show()
-                  val intent = Intent(applicationContext, MainActivity::class.java)
-                  startActivity(intent)
-                  finish()
-                }
-                .addOnFailureListener {
-                }
+
             }
 
         } else {

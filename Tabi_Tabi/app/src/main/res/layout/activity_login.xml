@@ -4,18 +4,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey_100"
-    android:orientation="vertical"
-    >
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:visibility="invisible" />
+    android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="350dp"
+            android:layout_marginEnd="160dp"
+            android:background="#ffffff"
+            android:text="認証中"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="170dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="170dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
@@ -23,21 +44,23 @@
         android:orientation="vertical">
 
 
-        <TextView
+        <ImageView
             android:id="@+id/titleText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
+            android:layout_height="0dp"
             android:layout_marginBottom="@dimen/title_bottom_margin"
-            android:text="旅☆旅★EasyDiary(仮)"
+            android:layout_weight="0.1"
+            android:src="@drawable/logo"
             android:theme="@style/ThemeOverlay.MyTitleText" />
 
         <TextView
             android:id="@+id/descriptionText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/title_bottom_margin"
             android:layout_marginBottom="@dimen/title_bottom_margin"
+
+            android:layout_weight="0.1"
             android:gravity="center"
             android:text="このアプリケーションを利用するにはgoogleでsign inしてください"
             android:textSize="25sp" />
@@ -45,9 +68,15 @@
         <com.google.android.gms.common.SignInButton
             android:id="@+id/signInButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="70dp"
+            android:layout_weight="0.1"
             android:gravity="center" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3" />
     </LinearLayout>
 
 

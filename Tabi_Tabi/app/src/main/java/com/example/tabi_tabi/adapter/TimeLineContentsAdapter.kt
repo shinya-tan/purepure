@@ -111,13 +111,13 @@ class TimeLineContentsAdapter(
       val toast = Toast.makeText(context, "いいねしました", Toast.LENGTH_LONG)
       toast.setGravity(Gravity.CENTER, 3, 3)
       toast.show()
-
       this.db = FirebaseFirestore.getInstance()
       val washingtonRef = db!!.collection("posts").document(documentIdList!![position])
       washingtonRef
         .update("like", nameList!![position].like?.plus(1))
       holder.like_number!!.text = nameList!![position].like?.plus(1).toString()
       nameList!![position].like?.toString()?.let { it1 -> Log.d(ContentValues.TAG, it1) }
+      holder.like_button!!.setColorFilter(android.R.color.holo_red_light)
     }
 
 
