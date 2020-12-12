@@ -25,7 +25,8 @@ class MainActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
     val fragmentTransaction = supportFragmentManager.beginTransaction()
-    fragmentTransaction.replace(R.id.container_fragment, timeLineFragment).addToBackStack(null).commit()
+    fragmentTransaction.replace(R.id.container_fragment, timeLineFragment).addToBackStack(null)
+      .commit()
     val actionBar: ActionBar? = supportActionBar
     actionBar?.setDisplayHomeAsUpEnabled(true)
     actionBar!!.show()
