@@ -85,7 +85,7 @@ class LoginActivity : AppCompatActivity() {
             auth.currentUser!!.photoUrl.toString()
           )
           this.db = FirebaseFirestore.getInstance()
-          db!!.collection("users").whereEqualTo("uid", auth.uid).get()
+          db!!.collection("users").whereEqualTo("uid", auth.currentUser!!.uid).get()
             .addOnSuccessListener {
               val intent = Intent(applicationContext, MainActivity::class.java)
               startActivity(intent)
@@ -93,7 +93,7 @@ class LoginActivity : AppCompatActivity() {
             }
             .addOnFailureListener {
               db!!.collection("users")
-                .document()
+                .document(auth.currentUser!!.uid)
                 .set(user)
                 .addOnSuccessListener {
                   Log.d(TAG, "signInWithCredential:success")

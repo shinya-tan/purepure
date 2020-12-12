@@ -23,7 +23,6 @@ android {
             abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86'
         }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-//        manifestPlaceholders = [api_key: System.getenv("APIKEY")]
     }
 
     buildTypes {
