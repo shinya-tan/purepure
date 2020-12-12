@@ -33,9 +33,6 @@
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".activity.UnityActivity">
-
-        </activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

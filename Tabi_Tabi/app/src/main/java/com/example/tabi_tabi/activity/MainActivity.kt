@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.tabi_tabi.R
 import com.example.tabi_tabi.fragment.PostFragment
 import com.example.tabi_tabi.fragment.RecommendFragment
-import com.example.tabi_tabi.fragment.SettingFragment
 import com.example.tabi_tabi.fragment.TimeLineFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import com.unity3d.player.UnityPlayerActivity
@@ -25,24 +24,25 @@ class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
-
+    val fragmentTransaction = supportFragmentManager.beginTransaction()
+    fragmentTransaction.replace(R.id.container_fragment, timeLineFragment).addToBackStack(null).commit()
     val actionBar: ActionBar? = supportActionBar
     actionBar?.setDisplayHomeAsUpEnabled(true)
     actionBar!!.show()
     footer.setOnNavigationItemReselectedListener { item ->
-      val fragmentTransaction = supportFragmentManager.beginTransaction()
+      val fragment = supportFragmentManager.beginTransaction()
       when (item.itemId) {
         R.id.navigation_recommend -> {
-          fragmentTransaction.replace(R.id.container_fragment, recommendFragment)
+          fragment.replace(R.id.container_fragment, recommendFragment)
           supportActionBar!!.show()
         }
 
         R.id.navigation_timeline -> {
-          fragmentTransaction.replace(R.id.container_fragment, timeLineFragment)
+          fragment.replace(R.id.container_fragment, timeLineFragment)
           supportActionBar!!.show()
         }
         R.id.navigation_search -> {
-          fragmentTransaction.replace(R.id.container_fragment, postFragment)
+          fragment.replace(R.id.container_fragment, postFragment)
           supportActionBar!!.show()
         }
         R.id.navigation_searchpost -> {
@@ -54,8 +54,7 @@ class MainActivity : AppCompatActivity() {
           startActivity(intent)
         }
       }
-      fragmentTransaction.addToBackStack(null).commit()
-
+      fragment.addToBackStack(null).commit()
     }
   }
 
@@ -73,9 +72,8 @@ class MainActivity : AppCompatActivity() {
       }
       R.id.setting -> {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.container_fragment, SettingFragment)
-        fragmentTransaction.addToBackStack(null).commit()
-        supportActionBar!!.show()
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.replace(R.id.container_fragment, SettingFragment).commit()
       }
     }
     return super.onOptionsItemSelected(item)
