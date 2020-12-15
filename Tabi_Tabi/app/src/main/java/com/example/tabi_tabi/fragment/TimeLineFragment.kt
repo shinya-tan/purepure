@@ -70,14 +70,11 @@ class TimeLineFragment : Fragment(), AdapterView.OnItemClickListener {
   private suspend fun dbGet() = runBlocking {
     val querySnapshot = db!!.collection("posts").get().await()
     for (document in querySnapshot) {
-      documentIdList.add(document.id)
       val timeLineModel: PostModel =
         document.toObject(PostModel::class.java)
       postModelList?.add(timeLineModel)
-      Log.d("test", "1")
-
+      documentIdList.add(timeLineModel.userId!!)
     }
-    Log.d("test", "2")
 
     for (postmodel in postModelList!!) {
       val documents = db!!.collection("users")
@@ -85,7 +82,6 @@ class TimeLineFragment : Fragment(), AdapterView.OnItemClickListener {
         .get().await()
       for (document in documents) {
         userModelList.add(document.toObject(UserModel::class.java))
-        Log.d("test", "check")
       }
     }
   }

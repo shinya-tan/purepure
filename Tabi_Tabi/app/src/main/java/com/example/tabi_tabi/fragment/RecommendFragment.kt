@@ -53,7 +53,7 @@ class RecommendFragment : BaseFragment() {
           }
           val shuffled: List<PostModel> = ArrayList(postModelListOrderByLike)
           val result: List<PostModel> = shuffled
-          var MaxListNumber: Int = result.count()
+          val MaxListNumber: Int = result.count()
 
           database.collection("posts")
             .get()
