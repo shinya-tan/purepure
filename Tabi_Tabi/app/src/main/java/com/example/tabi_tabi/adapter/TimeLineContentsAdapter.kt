@@ -2,8 +2,7 @@ package com.example.tabi_tabi.adapter
 
 import android.content.ContentValues
 import android.content.Context
-import android.media.Image
-import android.net.Uri
+import android.graphics.PorterDuff
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -16,10 +15,7 @@ import android.widget.Toast
 import com.example.tabi_tabi.R
 import com.example.tabi_tabi.model.PostModel
 import com.example.tabi_tabi.model.UserModel
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
@@ -117,7 +113,9 @@ class TimeLineContentsAdapter(
         .update("like", nameList!![position].like?.plus(1))
       holder.like_number!!.text = nameList!![position].like?.plus(1).toString()
       nameList!![position].like?.toString()?.let { it1 -> Log.d(ContentValues.TAG, it1) }
-      holder.like_button!!.setColorFilter(android.R.color.holo_red_light)
+      val mycolor: Int = context.getColor(android.R.color.holo_red_light)
+
+      holder.like_button!!.setColorFilter(mycolor, PorterDuff.Mode.SRC_ATOP)
     }
 
 
