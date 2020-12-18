@@ -52,7 +52,6 @@ android {
     packagingOptions {
         doNotStrip '*/armeabi-v7a/*.so'
         doNotStrip '*/arm64-v8a/*.so'
-        doNotStrip '*/x86/*.so'
     }
     bundle {
         language {
@@ -68,8 +67,9 @@ android {
 }
 
 dependencies {
-    implementation project(':unityLibrary-release')
-    implementation project(':FirebaseApp.androidlib-release')
+    implementation project(':unityLibrary-debug')
+    implementation project(':FirebaseApp.androidlib-debug')
+    implementation fileTree(dir: 'libs', include: ['unity-classes.jar'])
     implementation(name: 'com.google.firebase.firebase-app-unity-6.16.1', ext: 'aar')
     implementation(name: 'com.google.firebase.firebase-firestore-unity-6.16.1', ext: 'aar')
     implementation(name: 'com.google.firebase.firebase-storage-unity-6.16.1', ext: 'aar')
@@ -81,6 +81,8 @@ dependencies {
     implementation(name: 'unityandroidpermissions', ext: 'aar')
     implementation(name: 'google_ar_required', ext: 'aar')
     implementation(name: 'unitygar', ext: 'aar')
+    implementation(name: 'unitygar', ext: 'aar')
+
     implementation platform('com.google.firebase:firebase-bom:26.1.0')
 
     implementation 'com.google.firebase:firebase-analytics-ktx'
@@ -97,9 +99,6 @@ dependencies {
     implementation 'com.google.android.gms:play-services-basement:17.5.0'
     implementation 'com.google.firebase:firebase-storage-ktx'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'com.google.firebase:firebase-firestore-ktx:22.0.0'
-    implementation 'com.google.firebase:firebase-storage-ktx:19.2.0'
-    implementation 'com.google.firebase:firebase-auth:20.0.1'
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2"

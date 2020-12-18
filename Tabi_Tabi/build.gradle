@@ -25,7 +25,6 @@ allprojects {
         google()
         jcenter()
         flatDir {
-            dirs "${project(':unityLibrary-release').projectDir}/libs"
             dirs "${project(':app').projectDir}/libs"
         }
     }

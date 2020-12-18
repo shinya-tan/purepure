@@ -1,4 +1,4 @@
-include ':FirebaseApp.androidlib-release'
-include ':unityLibrary-release'
+include ':FirebaseApp.androidlib-debug'
+include ':unityLibrary-debug'
 include ':app'
 rootProject.name = "Tabi_Tabi"

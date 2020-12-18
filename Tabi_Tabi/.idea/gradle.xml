@@ -12,9 +12,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/FirebaseApp.androidlib-release" />
+            <option value="$PROJECT_DIR$/FirebaseApp.androidlib-debug" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/unityLibrary-release" />
+            <option value="$PROJECT_DIR$/unityLibrary-debug" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
