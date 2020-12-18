@@ -20,7 +20,6 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.LoginActivity"
-            android:label="Login"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
@@ -30,7 +29,6 @@
         </activity>
         <activity
             android:name=".activity.MainActivity"
-            android:label="@string/title_activity_home"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan" />
 
